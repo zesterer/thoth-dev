@@ -1,0 +1,8 @@
+# Build directories
+build
+build-*
+
+# Compiled code
+**.o
+**.bin
+**.kernel

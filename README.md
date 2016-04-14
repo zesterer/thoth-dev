@@ -1,6 +1,6 @@
 # Thoth
 
-An operating system inspired by Unix-like systems.
+An operating system inspired by the Unix philosophy and design.
 
 ## Objectives
 
@@ -23,12 +23,12 @@ Thoth uses the 'tup' build system. Make sure you install tup before attempting t
 
 Navigate to the top-level directory of Thoth and run the following commands:
 
-`
+```
 mkdir build-default
-cp tup.config build-default/.
-`
+cp tup.config build-default/tup.config
+```
 
-*NOTE: If you wish to build for a target system other than x86_64, edit the file 
+*NOTE: If you wish to build for a target architecture other than x86_64, edit the file 
 `build-default/tup.config` accordingly*
 
 Build Thoth by running the following command:
