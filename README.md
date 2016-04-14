@@ -27,6 +27,10 @@ Navigate to the top-level directory of Thoth and run the following commands:
 mkdir build-default
 cp tup.config build-default/.
 `
+
+*NOTE: If you wish to build for a target system other than x86_64, edit the file 
+`build-default/tup.config` accordingly*
+
 Build Thoth by running the following command:
 
 `
