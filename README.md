@@ -1,6 +1,6 @@
-# Binix
+# Thoth
 
-A unix-like operating system worthy of the bin.
+An operating system inspired by Unix-like systems.
 
 ## Objectives
 
@@ -8,7 +8,7 @@ The project has the following objectives...
 
 - To create a lightweight multi-platform monolithic kernel
 - To create a user-space environment for guest programs
-- To create a user-space interface to the OS in the style of Unix/POSIX
+- To create a user-space interface to the OS inspired by Unix/POSIX
 - To create a robust set of drivers for commonly used hardware
 
 ## Why?
@@ -18,6 +18,20 @@ This operating system is not designed for real-world use. It exists only as a wa
 ## Getting a copy
 
 ## Building
+
+Thoth uses the 'tup' build system. Make sure you install tup before attempting to build the project.
+
+Navigate to the top-level directory of Thoth and run the following commands:
+
+`
+mkdir build-default
+cp tup.config build-default/.
+`
+Build Thoth by running the following command:
+
+`
+tup build-default
+`
 
 ## Running
 

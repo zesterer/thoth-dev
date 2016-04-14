@@ -1,0 +1,5 @@
+include_rules
+
+INCLUDES = -Iinclude
+: foreach src/*.c	|> !gcc-obj	|>
+: *.o			|> !ar-lib	|> square.a

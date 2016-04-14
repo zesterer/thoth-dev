@@ -1,0 +1,6 @@
+include_rules
+
+INCLUDES = -Iinclude -Isquare/include
+
+: foreach src/*.c	|> !gcc-obj	|>
+: *.o square/square.a	|> gcc -o %o %f	|> hello

@@ -1,0 +1,28 @@
+STD_CFLAGS		= "-Wall -O2"
+
+PROJECT_NAME = thoth
+PROJECT_VERSION_MAJOR	= 0
+PROJECT_VERSION_MINOR	= 1
+PROJECT_VERSION_RELEASE	= 0
+
+COMPILER-C-i686-elf	= i686-elf-gcc
+COMPILER-CPP-i686-elf	= i686-elf-g++
+
+COMPILER-C-x86_64-elf	= x86_64-elf-gcc
+COMPILER-CPP-x86_64-elf	= x86_64-elf-g++
+
+ifndef TARGET
+	error "Error: No target specified"
+else
+ifeq (@(TARGET),i686)
+	COMPILER-C	= COMPILER-C-i686-elf
+	COMPILER-CPP	= COMPILER-CPP-i686-elf
+else
+ifeq (@(TARGET),x86_64)
+	COMPILER-C	= COMPILER-C-x86_64-elf
+	COMPILER-CPP	= COMPILER-CPP-x86_64-elf
+else
+	error "Error: Invalid target @(TARGET) specified"
+endif
+endif
+endif
