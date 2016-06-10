@@ -1,4 +1,6 @@
 CFLAGS = -Wall -O2
 
+INCLUDES = 
+
 !gcc-obj =	|> gcc $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
 !ar-lib =	|> ar rcs %o %f					|>

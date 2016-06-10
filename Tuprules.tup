@@ -15,12 +15,16 @@ ifndef TARGET
 	error "Error: No target specified"
 else
 ifeq (@(TARGET),i686)
-	COMPILER-C	= COMPILER-C-i686-elf
-	COMPILER-CPP	= COMPILER-CPP-i686-elf
+	!COMPILER-C =	|> $(COMPILER-C-i686-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!COMPILER-CPP =	|> $(COMPILER-CPP-i686-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!LINKER-C =	|> $(COMPILER-C-i686-elf) $(CFLAGS) -o %o %f	|> %B.o
+	!LINKER-CPP =	|> $(COMPILER-CPP-i686-elf) $(CFLAGS) -o %o %f	|> %B.o
 else
 ifeq (@(TARGET),x86_64)
-	COMPILER-C	= COMPILER-C-x86_64-elf
-	COMPILER-CPP	= COMPILER-CPP-x86_64-elf
+	!COMPILER-C =	|> $(COMPILER-C-x86_64-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!COMPILER-CPP =	|> $(COMPILER-CPP-x86_64-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!LINKER-C =	|> $(COMPILER-C-x86_64-elf) $(CFLAGS) -o %o %f	|> %B.o
+	!LINKER-CPP =	|> $(COMPILER-CPP-x86_64-elf) $(CFLAGS) -o %o %f	|> %B.o
 else
 	error "Error: Invalid target @(TARGET) specified"
 endif

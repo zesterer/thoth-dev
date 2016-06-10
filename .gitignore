@@ -1,6 +1,7 @@
 # Build directories
 build
 build-*
+build-default
 
 # Compiled code
 **.o

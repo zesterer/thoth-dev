@@ -1,0 +1,7 @@
+include_rules
+
+INCLUDES= -Iinclude
+
+: foreach *.c	|> !COMPILER-C -std=gnu99 -ffreestanding -O2 -Wall -Wextra	|>
+
+: *.o arch/i686/boot/*.o arch/i686/cstd/*.o cstd/*.o	|> !LINKER-C -T linker.ld -ffreestanding -O2 -nostdlib	|> thoth.bin
