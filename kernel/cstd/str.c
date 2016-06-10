@@ -4,7 +4,7 @@ size_t cstd_str_length(const char* str)
 {
 	int i;
 	for (i = 0; str[i] != 0; i ++) { }
-	
+
 	return i;
 }
 
@@ -36,7 +36,7 @@ char* cstd_str_copy_n(const char* src, char* dest, size_t n)
 	return dest;
 }
 
-char* cstd_str_find(const char* str, char val)
+const char* cstd_str_find(const char* str, char val)
 {
 	for (int i = 0; str[i] != 0; i ++)
 	{

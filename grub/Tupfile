@@ -1,0 +1,1 @@
+: ../kernel/thoth.bin |> ./create-iso.sh |> %B.iso isodir/boot/thoth.bin isodir/boot/grub/grub.cfg

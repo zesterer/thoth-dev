@@ -58,7 +58,7 @@ char* cstd_conv_int_to_str(int value, char* str, int base)
 
 	value = abs(value);
 
-	while (v < ((long)1 << (sizeof(int) * 8)))
+	while (v < ((long)1 << (sizeof(int) * 8 - 1)))
 		v *= base;
 
 	while (v > 0)

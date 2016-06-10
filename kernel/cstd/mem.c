@@ -122,6 +122,8 @@ int cstd_mem_free(const void* mem)
 		else
 			break;
 	}
+
+	return 0;
 }
 
 void cstd_mem_display(size_t n)

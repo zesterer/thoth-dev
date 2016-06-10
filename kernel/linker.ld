@@ -5,7 +5,7 @@ SECTIONS
 {
 	/* Offset the kernel at 1MB (to avoid interfering with the bootloader or any low-level initial code */
 	. = 1M;
-	
+
 	/* Place executable code within its own 4KB-aligned block */
 	.text BLOCK(4K) : ALIGN(4K)
 	{
@@ -14,19 +14,19 @@ SECTIONS
 		/* Place actual kernel code after the MultiBoot header so the bootloader knows where to find it */
 		*(.text)
 	}
-	
+
 	/* Read-only data */
 	.rodata BLOCK(4K) : ALIGN(4K)
 	{
 		*(.data)
 	}
-	
+
 	/* Read-write data (initialized) */
 	.data BLOCK(4K) : ALIGN(4K)
 	{
 		*(.data)
 	}
-	
+
 	/* Read-write data (uninitialized) and initial kernel stack */
 	.bss BLOCK(4K) : ALIGN(4K)
 	{
@@ -34,6 +34,11 @@ SECTIONS
 		*(.bss)
 		*(.bootstrap_stack)
 	}
-	
+
+	.kernel_end BLOCK(4K) : ALIGN(4K)
+	{
+		*(.kernel_end)
+	}
+
 	/* Any other sections produced by the compiler *should* be placed after this point */
 }

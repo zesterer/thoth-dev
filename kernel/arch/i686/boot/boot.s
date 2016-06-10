@@ -14,9 +14,9 @@
 
 // Allocate a temporary 16 KB bootstrap stack
 .section .bootstrap_stack, "aw", @nobits
-	stack_bottom:
+	_stack_bottom:
 	.skip 0x4000	// 16 KB
-	stack_top:
+	_stack_top:
 
 // Now for some actual code
 .section .text
@@ -26,12 +26,12 @@
 	_start:
 		// Now we have kernel code
 		// The first job is to tell the stack pointer where the bootstrap stack is
-		movl $stack_top, %esp
-		
+		movl $_stack_top, %esp
+
 		// We now have a C-worthy (get it?) environment
 		// Time to jump into kernel C
 		call kernel_main
-		
+
 		// If the kernel call returns, halt the system
 		jmp _halt
 
@@ -49,3 +49,8 @@
 
 // Set the size of the _start label to the current location minus its beginning position
 .size _start, . - _start
+
+// So we know where the end of the kernel is
+.section .kernel_end
+	.global _kernel_end
+	_kernel_end:
