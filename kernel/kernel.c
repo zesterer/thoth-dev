@@ -20,15 +20,19 @@ void terminal_write_check(const char* msg, int status)
 	cstd_io_put('\n');
 }
 
-void kernel_main()
+void kernel_early()
 {
 	cstd_io_init();
 
 	terminal_write_check("Entered kernel bootstrap", STATUS_SUCCESS);
 	terminal_write_check("Initialized VGA terminal", STATUS_SUCCESS);
+}
 
+void kernel_main()
+{
 	int result = cstd_mem_init((void*)0x400000, 0x100000, 1024); // At 4 MB, 1 MB in size, composed of blocks of 1 KB
 	terminal_write_check("Initiated kernel dynamic memory", !(result == 0));
+
 	terminal_write_check("Boot sequence complete", STATUS_INFO);
 
 	cstd_io_print("\n$B8Welcome to Thoth$B0\n");

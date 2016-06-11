@@ -29,7 +29,13 @@
 		movl $_stack_top, %esp
 
 		// We now have a C-worthy (get it?) environment
-		// Time to jump into kernel C
+		// Time to jump into kernel early C
+		call kernel_early
+
+		// Call C constructor code and others
+		call _init
+
+		// Main kernel code
 		call kernel_main
 
 		// If the kernel call returns, halt the system
