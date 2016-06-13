@@ -87,7 +87,7 @@ int cstd_mem_init(void* ptr, size_t size, size_t block_size)
 
 void* cstd_mem_allocate(size_t n)
 {
-	size_t block_number = n / dyn_block_size + 1;
+	size_t block_number = (n - 1) / dyn_block_size + 1;
 	size_t free_index = cstd_mem_find_free_blocks(block_number);
 
 	if (free_index >= dyn_block_count)

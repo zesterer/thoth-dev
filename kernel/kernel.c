@@ -35,7 +35,7 @@ void kernel_main()
 
 	terminal_write_check("Boot sequence complete", STATUS_INFO);
 
-	cstd_io_print("\n$B8Welcome to Thoth$B0\n");
+	cstd_io_print("\n$B8Welcome to Thoth v$F30.1.0$FF$B0\n");
 
 	cstd_mem_display(32);
 	void* a = cstd_mem_allocate(3);
@@ -58,6 +58,6 @@ void kernel_main()
 
 	char* msg = cstd_mem_allocate(1024);
 	cstd_str_copy("Hello, this is a memory-managed string!\n", msg);
-	cstd_mem_display(16);
+	cstd_mem_display(32);
 	cstd_io_print(msg);
 }

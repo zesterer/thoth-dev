@@ -11,6 +11,11 @@ The project has the following objectives...
 - To create a user-space interface to the OS inspired by Unix/POSIX
 - To create a robust set of drivers for commonly used hardware
 
+## Current features
+
+- Kernel-space VGA driver
+- Initial general-purpose C utility library
+
 ## Why?
 
 This operating system is not designed for real-world use. It exists only as a way through which I may become more familiar with OS development.
@@ -37,6 +42,12 @@ tup build-default
 `
 
 ## Running
+
+Run thoth using QEMU (make sure you have QEMU installed) with the following command:
+
+```
+sh qemu.sh
+```
 
 ## Credits
 
