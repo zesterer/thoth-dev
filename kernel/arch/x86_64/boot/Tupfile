@@ -1,5 +1,5 @@
 include_rules
 
-ifeq (@(TARGET),i686)
+ifeq (@(TARGET),x86_64)
 	: foreach *.s	|> !COMPILER-C $(C_FLAGS)	|>
 endif

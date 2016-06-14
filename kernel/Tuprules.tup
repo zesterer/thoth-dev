@@ -1,0 +1,9 @@
+ifeq (@(TARGET),i686)
+	OBJECTS=arch/i686/boot/*.o arch/i686/cstd/*.o
+	C_FLAGS=-std=gnu99 -ffreestanding -O2 -Wall -Wextra -nostdlib
+else
+ifeq (@(TARGET),x86_64)
+	OBJECTS=arch/x86_64/boot/*.o arch/x86_64/cstd/*.o
+	C_FLAGS=-std=gnu99 -fpic -ffreestanding -O2 -Wall -Wextra -nostdlib -lgcc -Wall -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -z max-page-size=4096
+endif
+endif

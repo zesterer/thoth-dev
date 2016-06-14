@@ -18,7 +18,7 @@ SECTIONS
 	/* Read-only data */
 	.rodata BLOCK(4K) : ALIGN(4K)
 	{
-		*(.data)
+		*(.rodata)
 	}
 
 	/* Read-write data (initialized) */

@@ -2,6 +2,6 @@ include_rules
 
 INCLUDES= -I../../../include
 
-ifeq (@(TARGET),i686)
+ifeq (@(TARGET),x86_64)
 	: foreach *.c	|> !COMPILER-C $(C_FLAGS)	|>
 endif
