@@ -27,6 +27,12 @@ void kernel_early()
 	cstd_io_init();
 
 	terminal_write_check("Entered kernel bootstrap", STATUS_SUCCESS);
+
+	#if THOTH_ARCH_x86_64
+		terminal_write_check("Created temporary GDT", STATUS_SUCCESS);
+		terminal_write_check("Jumped to 64-bit mode", STATUS_SUCCESS);
+	#endif
+
 	terminal_write_check("Initialized VGA terminal", STATUS_SUCCESS);
 }
 
@@ -37,7 +43,17 @@ void kernel_main()
 
 	terminal_write_check("Boot sequence complete", STATUS_INFO);
 
-	cstd_io_print("\n$B8Welcome to Thoth v$F30.1.0$FF$B0\n");
+	cstd_io_print("\n$B8 Welcome to Thoth $B0\n");
+
+	// Print version
+	cstd_io_print("$B8 Version:$B0 $F3");
+	cstd_io_print(THOTH_VERSION);
+	cstd_io_print("$FF\n");
+
+	// Print arch
+	cstd_io_print("$B8 Arch   :$B0 $F3");
+	cstd_io_print(THOTH_ARCH);
+	cstd_io_print("$FF\n");
 
 	cstd_mem_display(32);
 	void* a = cstd_mem_allocate(3);

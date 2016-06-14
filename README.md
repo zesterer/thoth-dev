@@ -13,6 +13,7 @@ The project has the following objectives...
 
 ## Current features
 
+- x86_64 and i686 (i386) versions
 - Kernel-space VGA driver
 - Initial general-purpose C utility library
 
