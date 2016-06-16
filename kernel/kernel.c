@@ -4,13 +4,19 @@
 #include "cstd/thoth.h"
 
 #include "thoth/util.h"
-#include "thoth/vga.h"
+
+#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
+	#include "thoth/vga.h"
+#endif
 
 extern void* kernel_end asm("_kernel_end");
 
 void kernel_early()
 {
-	int status = thoth_vga_init();
+
+	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
+		int status = thoth_vga_init();
+	#endif
 
 	putscheck("Entered kernel bootstrap", STATUS_SUCCESS);
 
@@ -19,7 +25,9 @@ void kernel_early()
 		putscheck("Jumped to 64-bit mode", STATUS_SUCCESS);
 	#endif
 
-	putscheck("Initialized VGA terminal", !(status == 0));
+	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
+		putscheck("Initialized VGA terminal", !(status == 0));
+	#endif
 }
 
 void kernel_main()

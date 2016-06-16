@@ -23,6 +23,17 @@ enum thoth_vga_color
 	THOTH_VGA_WHITE			= 15,
 };
 
+extern const size_t THOTH_VGA_WIDTH;
+extern const size_t THOTH_VGA_HEIGHT;
+
+extern size_t thoth_vga_terminal_row;
+extern size_t thoth_vga_terminal_column;
+extern uint8_t thoth_vga_terminal_color;
+extern uint16_t* thoth_vga_terminal_buffer;
+
+void thoth_vga_set_color(uint8_t front_color, uint8_t back_color);
+void thoth_vga_put_entry(char c, uint8_t color, size_t i, size_t j);
+
 int thoth_vga_init();
 void thoth_vga_putc(char c);
 void thoth_vga_puts(const char* str);
