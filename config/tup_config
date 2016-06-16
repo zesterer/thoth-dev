@@ -1,2 +1,2 @@
 # Supported targets are "i686" and "x86_64"
-CONFIG_TARGET=i686
+CONFIG_TARGET=x86_64

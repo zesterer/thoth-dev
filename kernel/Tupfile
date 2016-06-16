@@ -4,4 +4,4 @@ INCLUDES= -Iinclude
 
 : foreach *.c | linker.ld	|> !COMPILER-C $(C_FLAGS)	|>
 
-: *.o $(OBJECTS) cstd/*.o	|> !LINKER-C -T linker.ld $(C_FLAGS)	|> thoth.bin
+: *.o $(OBJECTS) cstd/*.o thoth/*.o	|> !LINKER-C -T linker.ld $(C_FLAGS)	|> thoth.bin
