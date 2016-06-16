@@ -1,5 +1,6 @@
 #include "thoth/util.h"
 #include "cstd/mem.h"
+#include "cstd/io.h"
 
 int thoth_dmem_init(void* ptr, size_t size, size_t block_size)
 {

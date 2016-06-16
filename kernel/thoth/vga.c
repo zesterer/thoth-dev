@@ -1,13 +1,20 @@
 #include "cstd/io.h"
 #include "cstd/str.h"
 #include "thoth/vga.h"
+#include "thoth/port.h"
 
-uint8_t thoth_vga_make_color(enum thoth_vga_color fg, enum thoth_vga_color bg)
+static uint8_t thoth_vga_make_color(enum thoth_vga_color fg, enum thoth_vga_color bg);
+static uint16_t thoth_vga_make_entry(char c, uint8_t color);
+
+static void thoth_vga_set_color(uint8_t front_color, uint8_t back_color);
+static void thoth_vga_put_entry(char c, uint8_t color, size_t i, size_t j);
+
+static uint8_t thoth_vga_make_color(enum thoth_vga_color fg, enum thoth_vga_color bg)
 {
 	return (bg << 4) | fg;
 }
 
-uint16_t thoth_vga_make_entry(char c, uint8_t color)
+static uint16_t thoth_vga_make_entry(char c, uint8_t color)
 {
 	return ((uint16_t)color << 8) | (uint16_t)c;
 }
@@ -24,7 +31,7 @@ int thoth_vga_init()
 {
 	thoth_vga_terminal_row = 0;
 	thoth_vga_terminal_column = 0;
-	thoth_vga_terminal_color = thoth_vga_make_color(COLOR_WHITE, COLOR_BLACK);
+	thoth_vga_terminal_color = thoth_vga_make_color(THOTH_VGA_WHITE, THOTH_VGA_BLACK);
 	thoth_vga_terminal_buffer = (uint16_t*)0xB8000;
 
 	for (size_t j = 0; j < THOTH_VGA_HEIGHT; j ++)
@@ -39,15 +46,27 @@ int thoth_vga_init()
 	return 0;
 }
 
-void thoth_vga_set_color(uint8_t front_color, uint8_t back_color)
+static void thoth_vga_set_color(uint8_t front_color, uint8_t back_color)
 {
 	thoth_vga_terminal_color = thoth_vga_make_color(front_color, back_color);
 }
 
-void thoth_vga_put_entry(char c, uint8_t color, size_t i, size_t j)
+static void thoth_vga_put_entry(char c, uint8_t color, size_t i, size_t j)
 {
 	const size_t index = j * THOTH_VGA_WIDTH + i;
 	thoth_vga_terminal_buffer[index] = thoth_vga_make_entry(c, color);
+}
+
+void thoth_vga_update_cursor(int row, int column)
+{
+	unsigned short pos = row * THOTH_VGA_WIDTH + column;
+
+    // cursor LOW port to vga INDEX register
+    thoth_port_outb(0x3D4, 0x0F);
+    thoth_port_outb(0x3D5, (unsigned char)(pos & 0xFF));
+    // cursor HIGH port to vga INDEX register
+    thoth_port_outb(0x3D4, 0x0E);
+    thoth_port_outb(0x3D5, (unsigned char )((pos >> 8) & 0xFF));
 }
 
 void thoth_vga_putc(char c)
@@ -70,9 +89,11 @@ void thoth_vga_putc(char c)
 		if (++thoth_vga_terminal_row >= THOTH_VGA_HEIGHT)
 			thoth_vga_terminal_row = 0;
 	}
+
+	thoth_vga_update_cursor(thoth_vga_terminal_row, thoth_vga_terminal_column);
 }
 
-bool char_is_hex(char c)
+static bool char_is_hex(char c)
 {
 	if (c >= '0' && c <= '9') return true;
 	if (c >= 'a' && c <= 'z') return true;
@@ -80,7 +101,7 @@ bool char_is_hex(char c)
 	return false;
 }
 
-uint8_t char_to_hex(char c)
+static uint8_t char_to_hex(char c)
 {
 	if (c >= '0' && c <= '9') return c - '0';
 	if (c >= 'a' && c <= 'f') return 10 + c - 'a';

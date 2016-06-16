@@ -10,7 +10,7 @@ extern void* kernel_end asm("_kernel_end");
 
 void kernel_early()
 {
-	thoth_vga_init();
+	int status = thoth_vga_init();
 
 	putscheck("Entered kernel bootstrap", STATUS_SUCCESS);
 
@@ -19,13 +19,13 @@ void kernel_early()
 		putscheck("Jumped to 64-bit mode", STATUS_SUCCESS);
 	#endif
 
-	putscheck("Initialized VGA terminal", STATUS_SUCCESS);
+	putscheck("Initialized VGA terminal", !(status == 0));
 }
 
 void kernel_main()
 {
-	int result = thoth_dmem_init((void*)0x400000, 0x100000, 1024); // At 4 MB, 1 MB in size, composed of blocks of 1 KB
-	putscheck("Initiated kernel dynamic memory", !(result == 0));
+	int status = thoth_dmem_init((void*)0x400000, 0x100000, 1024); // At 4 MB, 1 MB in size, composed of blocks of 1 KB
+	putscheck("Initiated kernel dynamic memory", !(status == 0));
 
 	putscheck("Boot sequence complete", STATUS_INFO);
 
@@ -61,7 +61,7 @@ void kernel_main()
 	thoth_dmem_display(32);
 
 	char* msg = cstd_mem_allocate(1024);
-	cstd_str_copy("Hello, this is a memory-managed string!\n", msg);
+	cstd_str_copy("Hello, World! This is a memory-managed string!\n", msg);
 	thoth_dmem_display(32);
 	cstd_io_print(msg);
 }
