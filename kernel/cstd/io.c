@@ -35,8 +35,11 @@ static uint8_t char_to_hex(char c)
 
 void cstd_io_print(const char* str)
 {
-	size_t len = cstd_str_length(str);
+	cstd_io_printn(str, cstd_str_length(str));
+}
 
+void cstd_io_printn(const char* str, size_t len)
+{
 	for (size_t i = 0; i < len; i ++)
 	{
 		int16_t escaped = 0;

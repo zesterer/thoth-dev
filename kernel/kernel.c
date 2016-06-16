@@ -1,7 +1,8 @@
-#include "cstd/str.h"
 #include "cstd/mem.h"
 #include "cstd/io.h"
 #include "cstd/thoth.h"
+
+#include "libc/stdio.h"
 
 #include "thoth/util.h"
 
@@ -37,17 +38,17 @@ void kernel_main()
 
 	putscheck("Boot sequence complete", STATUS_INFO);
 
-	cstd_io_print("\n$B8 Welcome to Thoth $B0\n");
+	printf("\n$B8 Welcome to Thoth $B0\n");
 
 	// Print version
-	cstd_io_print("$B8 Version:$B0 $F3");
-	cstd_io_print(THOTH_VERSION);
-	cstd_io_print("$FF\n");
+	printf("$B8 Version:$B0 $F3");
+	printf(THOTH_VERSION);
+	printf("$FF\n");
 
 	// Print arch
-	cstd_io_print("$B8 Arch   :$B0 $F3");
-	cstd_io_print(THOTH_ARCH);
-	cstd_io_print("$FF\n");
+	printf("$B8 Arch   :$B0 $F3");
+	printf(THOTH_ARCH);
+	printf("$FF\n");
 
 	thoth_dmem_display(32);
 	void* a = cstd_mem_allocate(3);
@@ -71,5 +72,5 @@ void kernel_main()
 	char* msg = cstd_mem_allocate(1024);
 	cstd_str_copy("Hello, World! This is a memory-managed string!\n", msg);
 	thoth_dmem_display(32);
-	cstd_io_print(msg);
+	printf(msg);
 }

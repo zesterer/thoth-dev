@@ -1,7 +1,7 @@
 include_rules
 
-INCLUDES= -Iinclude
+INCLUDES= -Iinclude -I../include
 
 : foreach *.c	|> !COMPILER-C $(C_FLAGS)	|>
 
-: *.o $(OBJECTS) cstd/*.o thoth/*.o | linker.ld	|> !LINKER-C -T linker.ld $(C_FLAGS)	|> thoth.bin
+: *.o $(OBJECTS) libc/*.o cstd/*.o thoth/*.o | linker.ld	|> !LINKER-C -T linker.ld $(C_FLAGS)	|> thoth.bin
