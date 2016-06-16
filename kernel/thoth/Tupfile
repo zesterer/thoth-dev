@@ -2,4 +2,4 @@ include_rules
 
 INCLUDES= -I../include
 
-: foreach *.c	|> !COMPILER-C -std=gnu99 -ffreestanding -O2 -Wall -Wextra	|>
+: foreach *.c	|> !COMPILER-C $(C_FLAGS)	|>
