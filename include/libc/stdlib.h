@@ -7,4 +7,11 @@
 int atoi(const char* str);
 char* itoa(int value, char* str, int base);
 
+//Pseudo-random sequence generation
+int rand();
+void srand(unsigned int seed);
+
+//Integer arithmetics
+int abs(int n);
+
 #endif

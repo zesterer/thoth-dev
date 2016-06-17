@@ -1,5 +1,0 @@
-include_rules
-
-INCLUDES= -I../include
-
-: foreach *.c	|> !COMPILER-C $(C_FLAGS)	|>

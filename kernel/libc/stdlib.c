@@ -40,7 +40,7 @@ char* itoa(int value, char* str, int base)
 
 	value = abs(value);
 
-	while (v < ((long)1 << (sizeof(int) * 8)))
+	while (v < ((long)1 << (sizeof(int) * 8 - 1)))
 		v *= base;
 
 	while (v > 0)
@@ -65,4 +65,26 @@ char* itoa(int value, char* str, int base)
 
 	str[i] = '\0';
 	return str;
+}
+
+/* Pseudo-random sequence generation */
+
+static unsigned long next_rand = 1;
+
+int rand()
+{
+	next_rand = next_rand * 1103515245 + 12345;
+	return (unsigned long)(next_rand / 65536) % 32768;
+}
+
+void srand(unsigned int seed)
+{
+	next_rand = seed;
+}
+
+/* Integer arithmetics */
+
+int abs(int n)
+{
+	return n < 0 ? -n : n;
 }

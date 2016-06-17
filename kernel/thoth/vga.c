@@ -1,5 +1,3 @@
-#include "cstd/io.h"
-#include "cstd/str.h"
 #include "thoth/vga.h"
 #include "thoth/port.h"
 

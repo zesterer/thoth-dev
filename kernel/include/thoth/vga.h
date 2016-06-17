@@ -1,7 +1,8 @@
 #ifndef THOTH_KERNEL_THOTH_VGA
 #define THOTH_KERNEL_THOTH_VGA
 
-#include "cstd/com.h"
+#include "stddef.h"
+#include "stdint.h"
 
 enum thoth_vga_color
 {

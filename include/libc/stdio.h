@@ -1,6 +1,8 @@
 #ifndef THOTH_LIBC_STDIO
 #define THOTH_LIBC_STDIO
 
+#include "stddef.h"
+#include "stdint.h"
 #include "stdarg.h"
 
 // A temporary FILE typedef
@@ -40,5 +42,8 @@ int vsprintf(char* s, const char* format, va_list arg);
 int vsscanf(const char* s, const char* format, va_list arg);
 
 // Character input/output
+
+int putchar(int character);
+int puts(const char* str);
 
 #endif

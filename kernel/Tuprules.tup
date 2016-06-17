@@ -1,11 +1,11 @@
 VERSION_FLAGS=-DTHOTH_ARCH_@(TARGET) -DTHOTH_ARCH=\"@(TARGET)\" -DTHOTH_VERSION=\"$(PROJECT_VERSION)\" -DTHOTH_VERSION_MAJOR=\"$(PROJECT_VERSION_MAJOR)\" -DTHOTH_VERSION_MINOR=\"$(PROJECT_VERSION_MINOR)\" -DTHOTH_VERSION_RELEASE=\"$(PROJECT_VERSION_RELEASE)\"
 
 ifeq (@(TARGET),i686)
-	OBJECTS=arch/i686/boot/*.o arch/i686/cstd/*.o arch/i686/thoth/*.o
+	OBJECTS=arch/i686/boot/*.o arch/i686/thoth/*.o
 	C_FLAGS=-std=gnu99 -ffreestanding -O2 -Wall -Wextra -nostdlib $(VERSION_FLAGS)
 else
 ifeq (@(TARGET),x86_64)
-	OBJECTS=arch/x86_64/boot/*.o arch/x86_64/cstd/*.o arch/x86_64/thoth/*.o
+	OBJECTS=arch/x86_64/boot/*.o arch/x86_64/thoth/*.o
 	C_FLAGS=-std=gnu99 -fpic -ffreestanding -O2 -Wall -Wextra -nostdlib -lgcc -Wall -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -z max-page-size=4096 $(VERSION_FLAGS)
 endif
 endif
