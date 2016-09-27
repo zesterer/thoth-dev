@@ -8,14 +8,14 @@
 // A temporary FILE typedef
 typedef uint32_t FILE;
 
-// Operations on files
+// Operations On Files
 
 int		remove(const char* filename);
 int		rename(const char* oldname, const char* newname);
 FILE*	tmpfile();
 char*	tmpnam(char* str);
 
-// File access
+// File Access
 
 int		fclose(FILE* stream);
 int		fflush(FILE* stream);
@@ -24,7 +24,7 @@ FILE*	freopen(const char* filename, const char* mode, FILE* stream);
 void	setbuf(FILE* stream, char* buffer);
 int		setvbuf(FILE* stream, char* buffer, int mode, size_t size);
 
-// Formatted input/output
+// Formatted Input/Output
 
 int fprintf(FILE* stream, const char* format, ...);
 int fscanf(FILE* stream, const char* format, ...);
@@ -41,7 +41,7 @@ int vsnprintf(char* s, size_t n, const char* format, va_list arg);
 int vsprintf(char* s, const char* format, va_list arg);
 int vsscanf(const char* s, const char* format, va_list arg);
 
-// Character input/output
+// Character Input/Output
 
 int putchar(int character);
 int puts(const char* str);

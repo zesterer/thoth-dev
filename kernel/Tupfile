@@ -4,4 +4,4 @@ INCLUDES= -Iinclude -I../include
 
 : foreach *.c	|> !COMPILER-C $(C_FLAGS)	|>
 
-: *.o $(OBJECTS) libc/*.o thoth/*.o | linker.ld	|> !LINKER-C -T linker.ld $(C_FLAGS)	|> thoth.bin
+: *.o $(OBJECTS) libc/*.o thoth/*.o | $(KERNEL_LINK_SCRIPT)	|> !LINKER-C -T $(KERNEL_LINK_SCRIPT) $(C_FLAGS)	|> thoth.bin

@@ -1,3 +1,4 @@
+#include "libc/stdlib.h"
 #include "libc/stdio.h"
 #include "libc/string.h"
 
@@ -59,25 +60,25 @@ void kernel_main()
 	// Dynamic memory test
 	{
 		thoth_mem_display(32);
-		void* a = thoth_mem_allocate(3);
+		void* a = malloc(3);
 		thoth_mem_display(32);
-		void* b = thoth_mem_allocate(4000);
+		void* b = malloc(4000);
 		thoth_mem_display(32);
-		void* c = thoth_mem_allocate(3);
+		void* c = malloc(3);
 		thoth_mem_display(32);
-		void* d = thoth_mem_allocate(2100);
-		thoth_mem_display(32);
-
-		thoth_mem_free(a);
-		thoth_mem_display(32);
-		thoth_mem_free(b);
-		thoth_mem_display(32);
-		thoth_mem_free(c);
-		thoth_mem_display(32);
-		thoth_mem_free(d);
+		void* d = malloc(2100);
 		thoth_mem_display(32);
 
-		char* msg = thoth_mem_allocate(1024);
+		free(a);
+		thoth_mem_display(32);
+		free(b);
+		thoth_mem_display(32);
+		free(c);
+		thoth_mem_display(32);
+		free(d);
+		thoth_mem_display(32);
+
+		char* msg = malloc(1024);
 		strcpy("Hello, World! This is a memory-managed string!\n", msg);
 		thoth_mem_display(32);
 		printf(msg);

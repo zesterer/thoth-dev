@@ -1,5 +1,7 @@
 #include "libc/stdlib.h"
 
+#include "thoth/mem.h"
+
 /* String conversion */
 
 int atoi(const char* str)
@@ -80,6 +82,33 @@ int rand()
 void srand(unsigned int seed)
 {
 	next_rand = seed;
+}
+
+/* Dynamic Memory Management */
+
+void* calloc(size_t num, size_t size)
+{
+	void* location = thoth_mem_allocate(num * size);
+
+	for (size_t i = 0; i < num * size; i ++)
+		((char*)location)[i] = 0x0;
+
+	return location;
+}
+
+void* malloc(size_t size)
+{
+	return thoth_mem_allocate(size);
+}
+
+void free(void* ptr)
+{
+	thoth_mem_free(ptr);
+}
+
+void* realloc(void* ptr, size_t size)
+{
+	return NULL;
 }
 
 /* Integer arithmetics */

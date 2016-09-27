@@ -3,15 +3,21 @@
 
 #include "stddef.h"
 
-//String conversion
+// String Conversion
 int atoi(const char* str);
 char* itoa(int value, char* str, int base);
 
-//Pseudo-random sequence generation
+// Pseudo-Random Sequence Generation
 int rand();
 void srand(unsigned int seed);
 
-//Integer arithmetics
+// Dynamic Memory Management
+void* calloc(size_t num, size_t size);
+void* malloc(size_t size);
+void free(void* ptr);
+void* realloc(void* ptr, size_t size);
+
+// Integer Arithmetics
 int abs(int n);
 
 #endif
