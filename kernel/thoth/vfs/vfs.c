@@ -68,7 +68,7 @@ int thoth_vfs_init()
 	thoth_vfs_init_node(&root, THOTH_VFS_DIRECTORY);
 	thoth_vfs_name_node(thoth_vfs_get_root(), "root");
 
-	thoth_io_check("Initiated VFS root directory", STATUS_SUCCESS);
+	thoth_io_check("Created VFS root directory", STATUS_SUCCESS);
 
 	return 0;
 }

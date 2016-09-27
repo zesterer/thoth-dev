@@ -1,7 +1,7 @@
 /*
-* 	filename	: ctype.h
+* 	filename	: _null_value.h
 * 	component	: libc
-* 	description	: Character handling functions
+* 	description	: The NULL constant
 *
 * 	This file is part of Thoth.
 *
@@ -19,27 +19,9 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _CTYPE_H
-#define _CTYPE_H 1
+#ifndef __NULL_VALUE_H
+#define __NULL_VALUE_H 1
 
-/* Character Classification Functions */
-
-int isalnum(int c);
-int isblank(int c);
-int isalpha(int c);
-int iscntrl(int c);
-int isdigit(int c);
-int isgraph(int c);
-int islower(int c);
-int isprint(int c);
-int ispunct(int c);
-int isspace(int c);
-int isupper(int c);
-int isxdigit(int c);
-
-/* Character Conversion Functions */
-
-int toupper(int c);
-int tolower(int c);
+#include "stddef.h"
 
 #endif

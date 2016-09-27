@@ -65,9 +65,7 @@ void kernel_main()
 
 	kernel_welcome();
 
-	printf("Creating 'testdir' directory in VFS...\n");
 	THOTH_VFS_NODE_ID root = thoth_vfs_get_root();
-
 	THOTH_VFS_NODE_ID testdir = thoth_vfs_create_node("testdir", root, THOTH_VFS_DIRECTORY);
 	THOTH_VFS_NODE_ID file1 = thoth_vfs_create_node("file1", testdir, THOTH_VFS_FILE);
 	THOTH_VFS_NODE_ID file2 = thoth_vfs_create_node("file2", root, THOTH_VFS_FILE);

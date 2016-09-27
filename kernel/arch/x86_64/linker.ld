@@ -1,9 +1,6 @@
 /* Entry point of the operating system. The bootloader will begin execution at this label */
 ENTRY(_start)
 
-/* What is the binary output format? */
-OUTPUT_FORMAT(elf64-x86-64)
-
 SECTIONS
 {
 	/* KERNEL_VMA = 0xC0000000; */

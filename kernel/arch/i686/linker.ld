@@ -1,9 +1,6 @@
 /* Entry point of the operating system. The bootloader will begin execution at this label */
 ENTRY(_start)
 
-/* What is the binary output format? */
-OUTPUT_FORMAT(elf32-i686)
-
 SECTIONS
 {
 	/* Offset the kernel at 1MB (to avoid interfering with the bootloader or any low-level initial code */

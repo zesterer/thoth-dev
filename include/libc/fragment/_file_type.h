@@ -1,7 +1,7 @@
 /*
-* 	filename	: ctype.h
+* 	filename	: _file_type.h
 * 	component	: libc
-* 	description	: Character handling functions
+* 	description	: The FILE type
 *
 * 	This file is part of Thoth.
 *
@@ -19,27 +19,14 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef _CTYPE_H
-#define _CTYPE_H 1
+#ifndef __FILE_TYPE_H
+#define __FILE_TYPE_H 1
 
-/* Character Classification Functions */
+/* FILE type */
 
-int isalnum(int c);
-int isblank(int c);
-int isalpha(int c);
-int iscntrl(int c);
-int isdigit(int c);
-int isgraph(int c);
-int islower(int c);
-int isprint(int c);
-int ispunct(int c);
-int isspace(int c);
-int isupper(int c);
-int isxdigit(int c);
-
-/* Character Conversion Functions */
-
-int toupper(int c);
-int tolower(int c);
+typedef struct _file_handle
+{
+	long file_handle;
+}_file_handle;
 
 #endif
