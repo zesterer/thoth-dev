@@ -5,6 +5,7 @@
 #include "thoth/time.h"
 #include "thoth/io.h"
 #include "thoth/mem.h"
+#include "thoth/vfs/vfs.h"
 
 #if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
 	#include "thoth/vga.h"
@@ -28,6 +29,8 @@ void kernel_early()
 	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
 		thoth_io_check("Initialized VGA terminal", !(status == 0));
 	#endif
+
+	thoth_io_check("Kernel bootstrap complete", STATUS_INFO);
 }
 
 void kernel_welcome()
@@ -50,15 +53,29 @@ void kernel_main()
 {
 	thoth_io_check("Entered kernel main", STATUS_SUCCESS);
 
-	int status = thoth_mem_init((void*)0x1000000, 0x100000, 1024); // At 16 MB, 1 MB in size, composed of blocks of 1 KB
-	thoth_io_check("Initiated kernel dynamic memory", !(status == 0));
+	// Dynamic Memory Map
+	int dmm_status = thoth_mem_init((void*)0x1000000, 0x100000, 1024); // At 16 MB, 1 MB in size, composed of blocks of 1 KB
+	thoth_io_check("Initiated kernel dynamic memory", !(dmm_status == 0));
+
+	// Virtual File System
+	int vfs_status = thoth_vfs_init();
+	thoth_io_check("Initiated kernel virtual filesystem", !(vfs_status == 0));
 
 	thoth_io_check("Boot sequence complete", STATUS_INFO);
 
 	kernel_welcome();
 
+	printf("Creating 'testdir' directory in VFS...\n");
+	THOTH_VFS_NODE_ID root = thoth_vfs_get_root();
+
+	THOTH_VFS_NODE_ID testdir = thoth_vfs_create_node("testdir", root, THOTH_VFS_DIRECTORY);
+	THOTH_VFS_NODE_ID file1 = thoth_vfs_create_node("file1", testdir, THOTH_VFS_FILE);
+	THOTH_VFS_NODE_ID file2 = thoth_vfs_create_node("file2", root, THOTH_VFS_FILE);
+	//thoth_vfs_delete_node(testdir);
+	thoth_vfs_display();
+
 	// Dynamic memory test
-	{
+	/*{
 		thoth_mem_display(32);
 		void* a = malloc(3);
 		thoth_mem_display(32);
@@ -82,7 +99,7 @@ void kernel_main()
 		strcpy("Hello, World! This is a memory-managed string!\n", msg);
 		thoth_mem_display(32);
 		printf(msg);
-	}
+	}*/
 
 	// CPU cycle clock
 	while (false)
