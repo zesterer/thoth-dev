@@ -34,16 +34,16 @@ extern "C" {
 
 /* Data Types */
 
-typedef uint8_t		byte;
-typedef uint16_t	word;
+typedef uint8_t		byte;	// A byte (8 bits)
+typedef uint16_t	word;	// A word (16 bits, 2 bytes)
 
 /* Pointer Types */
 
-typedef void*		ptr;
+typedef void*		ptr;	// A generic pointer to a memory location
 
 /* Size Types */
 
-typedef size_t		psize;
+typedef size_t		psize;	// A generic memory size integer
 
 // C++ Compatibility
 #ifdef __cplusplus

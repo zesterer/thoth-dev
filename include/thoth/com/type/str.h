@@ -34,18 +34,18 @@ extern "C" {
 
 /* Character Types */
 
-typedef uint32		wchar;
+typedef uint32	wchar;
 
 /* String Types */
 
-typedef char*		cstr;
-typedef struct { char* ptr; psize len; } str;
-typedef struct { wchar* ptr; psize len; } wstr;
+typedef char*	cstr;									// C-style string
+typedef struct { char* ptr; psize len; } str;			// Thoth-style length-defined string
+typedef struct { wchar* ptr; psize len; } wstr;			// wide Thoth-style length-defined string
 
 /* String Slice Types */
 
-typedef struct { char* ptr; psize len; } str_slice;
-typedef struct { wchar* ptr; psize len; } wstr_slice;
+typedef struct { char* ptr; psize len; } str_slice;		// Thoth-style length-defined string slice
+typedef struct { wchar* ptr; psize len; } wstr_slice;	// wide Thoth-style length-defined string slice
 
 // C++ Compatibility
 #ifdef __cplusplus

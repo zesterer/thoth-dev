@@ -30,8 +30,8 @@ extern "C" {
 
 /* Floating-Point Types */
 
-typedef float		f32;
-typedef double		f64;
+typedef float	f32;	// An IEEE 754 single-precision floating-point number
+typedef double	f64;	// An IEEE 754 double-precision floating-point number
 
 // C++ Compatibility
 #ifdef __cplusplus

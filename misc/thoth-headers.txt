@@ -9,7 +9,7 @@ thoth
 			bool.h
 			data.h
 			str.h
-		text / Text-Related Headers
+		str / Text-Related Headers
 			char.h
 			str.h
 			wchar.h

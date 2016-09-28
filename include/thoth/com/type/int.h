@@ -34,17 +34,21 @@ extern "C" {
 
 /* Unsigned Integer Types */
 
-typedef uint8_t		ui8;
-typedef uint16_t	ui16;
-typedef uint32_t	ui32;
-typedef uint64_t	ui64;
+typedef uint8_t			ui8;	// 8-bit unsigned integer
+typedef uint16_t		ui16;	// 16-bit unsigned integer
+typedef uint32_t		ui32;	// 32-bit unsigned integer
+typedef uint64_t		ui64;	// 64-bit unsigned integer
+
+typedef unsigned int	uintg;	// generic size unsigned integer
 
 /* Signed Integer Types */
 
-typedef int8_t		i8;
-typedef int16_t		i16;
-typedef int32_t		i32;
-typedef int64_t		i64;
+typedef int8_t			i8;		// 8-bit signed integer
+typedef int16_t			i16;	// 16-bit signed integer
+typedef int32_t			i32;	// 32-bit signed integer
+typedef int64_t			i64;	// 64-bit signed integer
+
+typedef signed int		intg;	// generic size signed integer
 
 // C++ Compatibility
 #ifdef __cplusplus
