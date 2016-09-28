@@ -31,6 +31,12 @@
 
 #include "libc/fragment/_null_value.h"
 
+/* C++ Compatibility */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Types */
 
 typedef struct { int quot; int rem; } div_t;
@@ -108,5 +114,9 @@ int wctomb(char* str, wchar_t wc);
 
 size_t mbstowcs(uint8_t* pwcs, const char* str, size_t n);
 size_t wcstombs(char* str, const uint8_t* pwcs, size_t n);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif

@@ -1,7 +1,7 @@
 /*
-* 	filename	: _file_type.h
+* 	filename	: data.h
 * 	component	: libc
-* 	description	: The FILE type
+* 	description	: Date type definitions
 *
 * 	This file is part of Thoth.
 *
@@ -19,24 +19,35 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __FILE_TYPE_H
-#define __FILE_TYPE_H 1
+// Header Guard
+#ifndef _THOTH_COM_TYPE_DATA_H
+#define _THOTH_COM_TYPE_DATA_H 1
 
-/* C++ Compatibility */
+/* GCC STD */
 
+#include "stdint.h"
+
+// C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* FILE type */
+/* Data Types */
 
-typedef struct _file_handle
-{
-	long file_handle;
-} _file_handle;
+typedef uint8_t		byte;
+typedef uint16_t	word;
 
+/* Pointer Types */
+
+typedef void*		ptr;
+
+/* Size Types */
+
+typedef size_t		psize;
+
+// C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif
+#endif //#ifndef _THOTH_COM_TYPE_DATA_H

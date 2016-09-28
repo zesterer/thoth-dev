@@ -1,0 +1,14 @@
+THOTH HEADERS
+
+thoth
+	common
+		text
+			string.h
+			character.h
+		convert
+			int.h
+			float.h
+			bool.h
+		types.h
+	kernel
+	hosted

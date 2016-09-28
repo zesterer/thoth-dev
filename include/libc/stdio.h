@@ -33,6 +33,12 @@
 #include "libc/fragment/_file_type.h"
 #include "libc/fragment/_null_value.h"
 
+/* C++ Compatibility */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Types */
 
 typedef _file_handle FILE;
@@ -113,5 +119,9 @@ void	clearerr(FILE* stream);
 int		feof(FILE* stream);
 int		ferror(FILE* stream);
 void	perror(const char* str);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif

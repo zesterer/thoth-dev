@@ -1,7 +1,7 @@
 /*
-* 	filename	: _file_type.h
+* 	filename	: int.h
 * 	component	: libc
-* 	description	: The FILE type
+* 	description	: Integer type definitions
 *
 * 	This file is part of Thoth.
 *
@@ -19,24 +19,36 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __FILE_TYPE_H
-#define __FILE_TYPE_H 1
+// Header Guard
+#ifndef _THOTH_COM_TYPE_INT_H
+#define _THOTH_COM_TYPE_INT_H 1
 
-/* C++ Compatibility */
+/* GCC STD */
 
+#include "stdint.h"
+
+// C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* FILE type */
+/* Unsigned Integer Types */
 
-typedef struct _file_handle
-{
-	long file_handle;
-} _file_handle;
+typedef uint8_t		ui8;
+typedef uint16_t	ui16;
+typedef uint32_t	ui32;
+typedef uint64_t	ui64;
 
+/* Signed Integer Types */
+
+typedef int8_t		i8;
+typedef int16_t		i16;
+typedef int32_t		i32;
+typedef int64_t		i64;
+
+// C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif
+#endif //#ifndef _THOTH_COM_TYPE_INT_H

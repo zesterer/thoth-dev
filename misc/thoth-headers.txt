@@ -1,0 +1,40 @@
+THOTH HEADERS
+
+thoth
+	com
+		type / Type Definition Headers
+			all.h
+			int.h
+			float.h
+			bool.h
+			data.h
+			str.h
+		text / Text-Related Headers
+			char.h
+			str.h
+			wchar.h
+			wstr.h
+			ustr.h
+		conv / Data Conversion Headers
+			int.h
+			float.h
+			bool.h
+			str.h
+		mem / Memory Management Headers
+			mem.h
+			dmem.h
+			pool.h
+	krnl / Kernel Headers
+		io
+			port.h
+		vga
+			mode.h
+			vga.h
+	user / Userland Headers
+		env / Environment-Related Headers
+			net.h / System Node Network
+			msg.h / IPC Message System
+			bdt.h / Binary Data Transfer
+		prot / Standard Communication Protocol Headers
+			file.h
+			udp.h

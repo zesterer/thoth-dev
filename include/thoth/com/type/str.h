@@ -1,7 +1,7 @@
 /*
-* 	filename	: _file_type.h
+* 	filename	: str.h
 * 	component	: libc
-* 	description	: The FILE type
+* 	description	: String type definitions
 *
 * 	This file is part of Thoth.
 *
@@ -19,24 +19,37 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __FILE_TYPE_H
-#define __FILE_TYPE_H 1
+// Header Guard
+#ifndef _THOTH_COM_TYPE_STR_H
+#define _THOTH_COM_TYPE_STR_H 1
 
-/* C++ Compatibility */
+/* THOTH */
 
+#include "thoth/com/type/data.h"
+
+// C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* FILE type */
+/* Character Types */
 
-typedef struct _file_handle
-{
-	long file_handle;
-} _file_handle;
+typedef uint32		wchar;
 
+/* String Types */
+
+typedef char*		cstr;
+typedef struct { char* ptr; psize len; } str;
+typedef struct { wchar* ptr; psize len; } wstr;
+
+/* String Slice Types */
+
+typedef struct { char* ptr; psize len; } str_slice;
+typedef struct { wchar* ptr; psize len; } wstr_slice;
+
+// C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif
+#endif //#ifndef _THOTH_COM_TYPE_STR_H

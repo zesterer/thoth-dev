@@ -22,6 +22,12 @@
 #ifndef _CTYPE_H
 #define _CTYPE_H 1
 
+/* C++ Compatibility */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Character Classification Functions */
 
 int isalnum(int c);
@@ -41,5 +47,9 @@ int isxdigit(int c);
 
 int toupper(int c);
 int tolower(int c);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif

@@ -31,6 +31,12 @@
 
 #include "libc/fragment/_null_value.h"
 
+/* C++ Compatibility */
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 /* Types */
 
 typedef size_t size_t;
@@ -64,5 +70,9 @@ void*	memchr(void* ptr, int value, size_t num);
 void*	memset(void* ptr, int value, size_t num);
 char*	strerror(int errnum);
 size_t	strlen(const char* str);
+
+#ifdef __cplusplus
+} //extern "C"
+#endif
 
 #endif

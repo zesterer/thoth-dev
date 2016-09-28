@@ -1,7 +1,7 @@
 /*
-* 	filename	: _file_type.h
+* 	filename	: float.h
 * 	component	: libc
-* 	description	: The FILE type
+* 	description	: Floating-point type definitions
 *
 * 	This file is part of Thoth.
 *
@@ -19,24 +19,23 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __FILE_TYPE_H
-#define __FILE_TYPE_H 1
+// Header Guard
+#ifndef _THOTH_COM_TYPE_FLOAT_H
+#define _THOTH_COM_TYPE_FLOAT_H 1
 
-/* C++ Compatibility */
-
+// C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* FILE type */
+/* Floating-Point Types */
 
-typedef struct _file_handle
-{
-	long file_handle;
-} _file_handle;
+typedef float		f32;
+typedef double		f64;
 
+// C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif
+#endif //#ifndef _THOTH_COM_TYPE_FLOAT_H

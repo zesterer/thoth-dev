@@ -1,7 +1,7 @@
 /*
-* 	filename	: _file_type.h
+* 	filename	: bool.h
 * 	component	: libc
-* 	description	: The FILE type
+* 	description	: Boolean type definitions
 *
 * 	This file is part of Thoth.
 *
@@ -19,24 +19,22 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#ifndef __FILE_TYPE_H
-#define __FILE_TYPE_H 1
+// Header Guard
+#ifndef _THOTH_COM_TYPE_BOOL_H
+#define _THOTH_COM_TYPE_BOOL_H 1
 
-/* C++ Compatibility */
+/* GCC STD */
 
+#include "stdbool.h"
+
+// C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* FILE type */
-
-typedef struct _file_handle
-{
-	long file_handle;
-} _file_handle;
-
+// C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif
+#endif //#ifndef _THOTH_COM_TYPE_BOOL_H
