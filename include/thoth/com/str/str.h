@@ -1,7 +1,7 @@
 /*
-* 	filename	: int.h
+* 	filename	: str.h
 * 	component	: libc
-* 	description	: Integer type definitions
+* 	description	: String-related function definitions
 *
 * 	This file is part of Thoth.
 *
@@ -20,43 +20,52 @@
 */
 
 // Header Guard
-#ifndef _THOTH_COM_TYPE_INT_H
-#define _THOTH_COM_TYPE_INT_H 1
+#ifndef _THOTH_COM_STR_STR_H
+#define _THOTH_COM_STR_STR_H 1
+
+/* THOTH */
+
+#include "thoth/com/type/all.h"
 
 /* GCC STD */
 
-#include "stdint.h"
+#include "stdarg.h"
 
 // C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Unsigned Integer Types */
+// NOTE: most functions in this file require the existence of a dynamic memory pool
 
-typedef uint8_t			ui8;	// 8-bit unsigned integer
-typedef uint16_t		ui16;	// 16-bit unsigned integer
-typedef uint32_t		ui32;	// 32-bit unsigned integer
-typedef uint64_t		ui64;	// 64-bit unsigned integer
+/* String Creation Functions */
 
-typedef unsigned int	uintg;	// Generic size unsigned integer
+str		tc_Str(const cstr s);
 
-/* Signed Integer Types */
+/* String Attribute Functions */
 
-typedef int8_t			i8;		// 8-bit signed integer
-typedef int16_t			i16;	// 16-bit signed integer
-typedef int32_t			i32;	// 32-bit signed integer
-typedef int64_t			i64;	// 64-bit signed integer
+ptr		tc_StrSrc(str s);
+psize	tc_StrLen(str s);
 
-typedef signed int		intg;	// Generic size signed integer
+/* String Access Functions */
 
-/* Status Integer Types */
+char	tc_StrAt(str s, psize pos);
 
-typedef signed int		sint	// Signed status integer
+/* String Manipulation Functions */
+
+str		tc_CopyStr(str s);
+str		tc_Concat(str s, ...);
+str		tc_SubStr(str s, psize offset, psize len);
+
+/* String Search Functions */
+
+psize	tc_StrFindFirst(str s, char c);
+psize	tc_StrFindLast(str s, char c);
+psize	tc_StrFindSubStr(str s, str sub);
 
 // C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif //#ifndef _THOTH_COM_TYPE_INT_H
+#endif //#ifndef _THOTH_COM_STR_STR_H

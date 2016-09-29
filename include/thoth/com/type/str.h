@@ -38,14 +38,9 @@ typedef uint32	wchar;
 
 /* String Types */
 
-typedef char*	cstr;									// C-style string
-typedef struct { char* ptr; psize len; } str;			// Thoth-style length-defined string
-typedef struct { wchar* ptr; psize len; } wstr;			// wide Thoth-style length-defined string
-
-/* String Slice Types */
-
-typedef struct { char* ptr; psize len; } str_slice;		// Thoth-style length-defined string slice
-typedef struct { wchar* ptr; psize len; } wstr_slice;	// wide Thoth-style length-defined string slice
+typedef char*	cstr;												// C-style string
+typedef struct TC_STR { char* ptr; psize len; } str;				// Thoth-style pool-allocated length-defined string
+typedef struct TC_WSTR { wchar* ptr; psize len; } wstr;				// wide Thoth-style pool-allocated length-defined string
 
 // C++ Compatibility
 #ifdef __cplusplus
