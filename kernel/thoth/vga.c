@@ -43,7 +43,7 @@ int thoth_vga_init()
 
 void thoth_vga_set_color(uint8_t front_color, uint8_t back_color)
 {
-	thoth_vga_terminal_color = thoth_vga_make_color(front_color, back_color);
+	thoth_vga_terminal_color = thoth_vga_make_color((thoth_vga_color)front_color, (thoth_vga_color)back_color);
 }
 
 void thoth_vga_put_entry(char c, uint8_t color, size_t i, size_t j)
@@ -58,10 +58,10 @@ void thoth_vga_update_cursor(int row, int column)
 
     // cursor LOW port to vga INDEX register
     thoth_port_outb(0x3D4, 0x0F);
-    thoth_port_outb(0x3D5, (unsigned char)(pos & 0xFF));
+    thoth_port_outb(0x3D5, (uint8_t)(pos & 0xFF));
     // cursor HIGH port to vga INDEX register
     thoth_port_outb(0x3D4, 0x0E);
-    thoth_port_outb(0x3D5, (unsigned char )((pos >> 8) & 0xFF));
+    thoth_port_outb(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
 }
 
 void thoth_vga_putc(char c)

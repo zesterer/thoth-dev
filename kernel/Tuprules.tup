@@ -1,13 +1,17 @@
 VERSION_FLAGS=-DTHOTH_ARCH_@(TARGET) -DTHOTH_ARCH=\"@(TARGET)\" -DTHOTH_VERSION=\"$(PROJECT_VERSION)\" -DTHOTH_VERSION_MAJOR=\"$(PROJECT_VERSION_MAJOR)\" -DTHOTH_VERSION_MINOR=\"$(PROJECT_VERSION_MINOR)\" -DTHOTH_VERSION_RELEASE=\"$(PROJECT_VERSION_RELEASE)\"
 
+COMMON_FLAGS=-std=gnu++11 -fno-rtti -ffreestanding -O2 -Wall -Wextra -nostdlib -fpic -lgcc
+
 ifeq (@(TARGET),i686)
 	OBJECTS=arch/i686/boot/*.o arch/i686/thoth/*.o
-	C_FLAGS=-std=gnu99 -ffreestanding -O2 -Wall -Wextra -nostdlib $(VERSION_FLAGS)
+	C_FLAGS=$(COMMON_FLAGS) $(VERSION_FLAGS)
+	CPP_FLAGS=$(COMMON_FLAGS) $(VERSION_FLAGS)
 	KERNEL_LINK_SCRIPT=arch/i686/linker.ld
 else
 ifeq (@(TARGET),x86_64)
 	OBJECTS=arch/x86_64/boot/*.o arch/x86_64/thoth/*.o
-	C_FLAGS=-std=gnu99 -fpic -ffreestanding -O2 -Wall -Wextra -nostdlib -lgcc -Wall -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -z max-page-size=4096 $(VERSION_FLAGS)
+	C_FLAGS=$(COMMON_FLAGS) -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -z max-page-size=4096 $(VERSION_FLAGS)
+	CPP_FLAGS=$(COMMON_FLAGS) -mcmodel=large -mno-red-zone -mno-mmx -mno-sse -mno-sse2 -z max-page-size=4096 $(VERSION_FLAGS)
 	KERNEL_LINK_SCRIPT=arch/x86_64/linker.ld
 endif
 endif

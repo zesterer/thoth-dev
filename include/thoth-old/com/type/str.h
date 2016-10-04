@@ -1,7 +1,7 @@
 /*
-* 	filename	: bool.h
-* 	component	: libc
-* 	description	: Boolean type definitions
+* 	filename	: str.h
+* 	component	: thoth
+* 	description	: String type definitions
 *
 * 	This file is part of Thoth.
 *
@@ -20,21 +20,31 @@
 */
 
 // Header Guard
-#ifndef _THOTH_COM_TYPE_BOOL_H
-#define _THOTH_COM_TYPE_BOOL_H 1
+#ifndef _THOTH_COM_TYPE_STR_H
+#define _THOTH_COM_TYPE_STR_H 1
 
-/* GCC STD */
+/* THOTH */
 
-#include "stdbool.h"
+#include "thoth/com/type/data.h"
 
 // C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
+/* Character Types */
+
+typedef uint32	wchar;
+
+/* String Types */
+
+typedef char*	cstr;												// C-style string
+typedef struct TC_STR { char* ptr; psize len; } str;				// Thoth-style pool-allocated length-defined string
+typedef struct TC_WSTR { wchar* ptr; psize len; } wstr;				// wide Thoth-style pool-allocated length-defined string
+
 // C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif //#ifndef _THOTH_COM_TYPE_BOOL_H
+#endif //#ifndef _THOTH_COM_TYPE_STR_H

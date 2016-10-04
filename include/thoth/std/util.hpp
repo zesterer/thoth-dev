@@ -1,7 +1,6 @@
 /*
-* 	filename	: all.h
-* 	component	: libc
-* 	description	: All type definitions
+* 	filename	: util.hpp
+* 	component	: thoth
 *
 * 	This file is part of Thoth.
 *
@@ -19,26 +18,37 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Header Guard
-#ifndef _THOTH_COM_TEXT_ALL_H
-#define _THOTH_COM_TEXT_ALL_H 1
+// Header guard
+#ifndef _THOTH_STD_UTIL_HPP
+#define _THOTH_STD_UTIL_HPP 1
 
-/* THOTH */
+namespace Thoth
+{
+	enum { STATUS_SUCCESS = 0, };
 
-#include "thoth/com/type/bool.h"
-#include "thoth/com/type/data.h"
-#include "thoth/com/type/float.h"
-#include "thoth/com/type/int.h"
-#include "thoth/com/type/str.h"
+	/* Result type */
 
-// C++ Compatibility
-#ifdef __cplusplus
-extern "C" {
+	template <typename T>
+	struct Result
+	{
+		T value;
+		int status;
+
+		Result (int status)
+		{
+			this->status = status;
+		}
+
+		Result (T value, int status)
+		{
+			this->value = value;
+			this->status = status;
+		}
+
+		bool getSuccessful() { return this->status == STATUS_SUCCESS; }
+		T getValue() { return this->value; }
+	};
+}
+
+// Header guard
 #endif
-
-// C++ Compatibility
-#ifdef __cplusplus
-} //extern "C"
-#endif
-
-#endif //#ifndef _THOTH_COM_TEXT_ALL_H

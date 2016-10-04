@@ -1,7 +1,6 @@
 /*
-* 	filename	: float.h
-* 	component	: libc
-* 	description	: Floating-point type definitions
+* 	filename	: cpp.cpp
+* 	component	: thoth
 *
 * 	This file is part of Thoth.
 *
@@ -19,23 +18,37 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Header Guard
-#ifndef _THOTH_COM_TYPE_FLOAT_H
-#define _THOTH_COM_TYPE_FLOAT_H 1
+// Thoth headers
+#include "thoth/std/io.hpp"
 
-// C++ Compatibility
-#ifdef __cplusplus
-extern "C" {
-#endif
+#include "libc/stdlib.h"
 
-/* Floating-Point Types */
+// GCC headers
+#include "stddef.h"
 
-typedef float	f32;	// An IEEE 754 single-precision floating-point number
-typedef double	f64;	// An IEEE 754 double-precision floating-point number
+/* Virtual function error */
 
-// C++ Compatibility
-#ifdef __cplusplus
-} //extern "C"
-#endif
+extern "C" void __cxa_pure_virtual()
+{
+	Thoth::Std::IO::PrintLine("$B4[ $FCERROR$FF : Call to pure virtual function failed! ]$B0");
+}
 
-#endif //#ifndef _THOTH_COM_TYPE_FLOAT_H
+void *operator new(size_t size)
+{
+    return malloc(size);
+}
+
+void *operator new[](size_t size)
+{
+    return malloc(size);
+}
+
+void operator delete(void *p)
+{
+    free(p);
+}
+
+void operator delete[](void *p)
+{
+    free(p);
+}

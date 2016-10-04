@@ -103,7 +103,7 @@ THOTH_VFS_NODE_ID thoth_vfs_create_node(const char* name, const THOTH_VFS_NODE_I
 	if (new_node == NULL || parent_node == NULL || parent_node->type != THOTH_VFS_DIRECTORY)
 		return 0;
 
-	thoth_vfs_init_node(new_node, type);
+	thoth_vfs_init_node(new_node, (thoth_vfs_node_type)type);
 
 	new_node->parent = parent_node;
 

@@ -1,7 +1,7 @@
 /*
 * 	filename	: int.h
-* 	component	: libc
-* 	description	: Integer type definitions
+* 	component	: thoth
+* 	description	: Integer conversion function definitions
 *
 * 	This file is part of Thoth.
 *
@@ -20,43 +20,39 @@
 */
 
 // Header Guard
-#ifndef _THOTH_COM_TYPE_INT_H
-#define _THOTH_COM_TYPE_INT_H 1
+#ifndef _THOTH_COM_CONV_INT_H
+#define _THOTH_COM_CONV_INT_H 1
+
+/* THOTH */
+
+#include "thoth/com/type/all.h"
 
 /* GCC STD */
 
-#include "stdint.h"
+#include "stdarg.h"
 
 // C++ Compatibility
 #ifdef __cplusplus
 extern "C" {
 #endif
 
-/* Unsigned Integer Types */
+/* Integer Conversion Functions */
 
-typedef uint8_t			ui8;	// 8-bit unsigned integer
-typedef uint16_t		ui16;	// 16-bit unsigned integer
-typedef uint32_t		ui32;	// 32-bit unsigned integer
-typedef uint64_t		ui64;	// 64-bit unsigned integer
+str		tc_UInt8ToStr(ui8 x);
+str		tc_UInt16ToStr(ui16 x);
+str		tc_UInt32ToStr(ui32 x);
+str		tc_UInt64ToStr(ui64 x);
 
-typedef unsigned int	uintg;	// Generic size unsigned integer
+str		tc_Int8ToStr(i8 x);
+str		tc_Int16ToStr(i16 x);
+str		tc_Int32ToStr(i32 x);
+str		tc_Int64ToStr(i64 x);
 
-/* Signed Integer Types */
-
-typedef int8_t			i8;		// 8-bit signed integer
-typedef int16_t			i16;	// 16-bit signed integer
-typedef int32_t			i32;	// 32-bit signed integer
-typedef int64_t			i64;	// 64-bit signed integer
-
-typedef signed int		intg;	// Generic size signed integer
-
-/* Status Integer Types */
-
-typedef signed int		sint	// Signed status integer
+str		tc_IntToStr(intg x);
 
 // C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif //#ifndef _THOTH_COM_TYPE_INT_H
+#endif //#ifndef _THOTH_COM_CONV_INT_H

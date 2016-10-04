@@ -1,7 +1,6 @@
 /*
-* 	filename	: data.h
-* 	component	: libc
-* 	description	: Date type definitions
+* 	filename	: io.hpp
+* 	component	: thoth
 *
 * 	This file is part of Thoth.
 *
@@ -19,35 +18,25 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Header Guard
-#ifndef _THOTH_COM_TYPE_DATA_H
-#define _THOTH_COM_TYPE_DATA_H 1
+// Header guard
+#ifndef _THOTH_STD_IO_HPP
+#define _THOTH_STD_IO_HPP 1
 
-/* GCC STD */
+// Thoth headers
+#include "thoth/std/util.hpp"
 
-#include "stdint.h"
+namespace Thoth
+{
+	namespace Std
+	{
+		namespace IO
+		{
+			Result<const char*> Print(const char* s);
+			Result<const char*> PrintLine(const char* s);
+			Result<const char*> PrintFormat(const char* format, ...);
+		}
+	}
+}
 
-// C++ Compatibility
-#ifdef __cplusplus
-extern "C" {
+// Header guard
 #endif
-
-/* Data Types */
-
-typedef uint8_t		byte;	// A byte (8 bits)
-typedef uint16_t	word;	// A word (16 bits, 2 bytes)
-
-/* Pointer Types */
-
-typedef void*		ptr;	// A generic pointer to a memory location
-
-/* Size Types */
-
-typedef size_t		psize;	// A generic memory size integer
-
-// C++ Compatibility
-#ifdef __cplusplus
-} //extern "C"
-#endif
-
-#endif //#ifndef _THOTH_COM_TYPE_DATA_H

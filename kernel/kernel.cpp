@@ -7,16 +7,20 @@
 #include "thoth/mem.h"
 #include "thoth/vfs/vfs.h"
 
+// New C++ headers
+#include "thoth/kernel/driver/vga/vga.hpp"
+#include "thoth/std/io.hpp"
+
 #if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
 	#include "thoth/vga.h"
 #endif
 
 extern void* kernel_end asm("_kernel_end");
 
-void kernel_early()
+extern "C" void kernel_early()
 {
 	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
-		int status = thoth_vga_init();
+		Thoth::Result<char> result = Thoth::Kernel::Driver::VGA::Init();
 	#endif
 
 	thoth_io_check("Entered kernel bootstrap", STATUS_SUCCESS);
@@ -27,7 +31,7 @@ void kernel_early()
 	#endif
 
 	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
-		thoth_io_check("Initialized VGA terminal", !(status == 0));
+		thoth_io_check("Initialized VGA terminal", result.status);
 	#endif
 
 	thoth_io_check("Kernel bootstrap complete", STATUS_INFO);
@@ -49,7 +53,7 @@ void kernel_welcome()
 	printf("$FF\n");
 }
 
-void kernel_main()
+extern "C" void kernel_main()
 {
 	thoth_io_check("Entered kernel main", STATUS_SUCCESS);
 
@@ -64,6 +68,8 @@ void kernel_main()
 	thoth_io_check("Boot sequence complete", STATUS_INFO);
 
 	kernel_welcome();
+
+	Thoth::Std::IO::PrintFormat("Hello, there! Here's the number twelve:%iand four hundred and six as hex:%X\n", 12, 406);
 
 	THOTH_VFS_NODE_ID root = thoth_vfs_get_root();
 	THOTH_VFS_NODE_ID testdir = thoth_vfs_create_node("testdir", root, THOTH_VFS_DIRECTORY);

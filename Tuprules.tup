@@ -16,16 +16,16 @@ ifndef TARGET
 	error "Error: No target specified"
 else
 ifeq (@(TARGET),i686)
-	!COMPILER-C =	|> $(COMPILER-C-i686-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
-	!COMPILER-CPP =	|> $(COMPILER-CPP-i686-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
-	!LINKER-C =	|> $(COMPILER-C-i686-elf) $(CFLAGS) -o %o %f	|> %B.o
-	!LINKER-CPP =	|> $(COMPILER-CPP-i686-elf) $(CFLAGS) -o %o %f	|> %B.o
+	!COMPILER_C =	|> $(COMPILER-C-i686-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!COMPILER_CPP =	|> $(COMPILER-CPP-i686-elf) $(CPPFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!LINKER_C =	|> $(COMPILER-C-i686-elf) $(CFLAGS) -o %o %f	|> %B.o
+	!LINKER_CPP =	|> $(COMPILER-CPP-i686-elf) $(CPPFLAGS) -o %o %f	|> %B.o
 else
 ifeq (@(TARGET),x86_64)
-	!COMPILER-C =	|> $(COMPILER-C-x86_64-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
-	!COMPILER-CPP =	|> $(COMPILER-CPP-x86_64-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
-	!LINKER-C =	|> $(COMPILER-C-x86_64-elf) $(CFLAGS) -o %o %f	|> %B.o
-	!LINKER-CPP =	|> $(COMPILER-CPP-x86_64-elf) $(CFLAGS) -o %o %f	|> %B.o
+	!COMPILER_C =	|> $(COMPILER-C-x86_64-elf) $(CFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!COMPILER_CPP =	|> $(COMPILER-CPP-x86_64-elf) $(CPPFLAGS) -c $(INCLUDES) -o %o %f	|> %B.o
+	!LINKER_C =	|> $(COMPILER-C-x86_64-elf) $(CFLAGS) -o %o %f	|> %B.o
+	!LINKER_CPP =	|> $(COMPILER-CPP-x86_64-elf) $(CPPFLAGS) -o %o %f	|> %B.o
 else
 	error "Error: Invalid target @(TARGET) specified"
 endif

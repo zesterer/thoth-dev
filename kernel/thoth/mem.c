@@ -31,7 +31,7 @@ int thoth_mem_init(void* ptr, size_t size, size_t block_size)
 	thoth_dmap_start = thoth_dmem_start;
 	thoth_dmap_size = thoth_dblock_count * thoth_dmap_entry_size;
 
-	thoth_ddump_start = thoth_dmem_start + thoth_dmap_size;
+	thoth_ddump_start = (void*)((size_t)thoth_dmem_start + thoth_dmap_size);
 	thoth_ddump_size = thoth_dblock_size * thoth_dblock_count;
 
 	if (thoth_dblock_count <= 0)
@@ -114,7 +114,7 @@ void* thoth_mem_allocate(size_t n)
 	for (size_t i = 1; i < block_number; i ++)
 		((uint8_t*)thoth_dmap_start)[free_index + i] = USED | (!HEAD);
 
-	return thoth_ddump_start + free_index * thoth_dblock_size;
+	return (void*)((size_t)thoth_ddump_start + free_index * thoth_dblock_size);
 }
 
 int thoth_mem_free(const void* mem)
@@ -125,7 +125,7 @@ int thoth_mem_free(const void* mem)
 		return 1;
 	}
 
-	size_t index = (mem - thoth_ddump_start);
+	size_t index = ((size_t)mem - (size_t)thoth_ddump_start);
 
 	if (index % thoth_dblock_size != 0)
 		return 1;

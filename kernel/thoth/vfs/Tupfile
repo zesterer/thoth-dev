@@ -2,4 +2,4 @@ include_rules
 
 INCLUDES= -I../../include -I../../../include
 
-: foreach *.c	|> !COMPILER-C $(C_FLAGS)	|>
+: foreach *.c	|> !COMPILER_CPP $(CPP_FLAGS)	|>

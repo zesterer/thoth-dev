@@ -2,6 +2,6 @@ include_rules
 
 INCLUDES= -Iinclude -I../include
 
-: foreach *.c	|> !COMPILER-C $(C_FLAGS)	|>
+: foreach *.c *.cpp	|> !COMPILER_CPP $(CPP_FLAGS)	|>
 
-: *.o $(OBJECTS) libc/*.o thoth/*.o thoth/vfs/*.o | $(KERNEL_LINK_SCRIPT)	|> !LINKER-C -T $(KERNEL_LINK_SCRIPT) $(C_FLAGS)	|> thoth.bin
+: *.o $(OBJECTS) libc/*.o thoth/*.o thoth/vfs/*.o lib/thoth/std/*.o lib/thoth/kernel/driver/vga/*.o | $(KERNEL_LINK_SCRIPT) |> !LINKER_CPP -T $(KERNEL_LINK_SCRIPT) $(CPP_FLAGS) |> thoth.bin

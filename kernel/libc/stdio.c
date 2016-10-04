@@ -7,6 +7,8 @@
 	#include "thoth/vga.h"
 #endif
 
+#include "thoth/kernel/driver/vga/vga.hpp"
+
 #include "stdbool.h"
 
 static bool char_is_hex(char c);
@@ -114,7 +116,7 @@ int printf(const char* format, ...)
 int putchar(int character)
 {
 	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
-		thoth_vga_putc((char)character);
+		Thoth::Kernel::Driver::VGA::PutChar((char)character);
 	#else
 		// Do nothing
 	#endif
@@ -158,7 +160,7 @@ static int putsn(const char* str, size_t len)
 					escaped = 1;
 
 					#if defined(THOTH_ARCH_x86_64) || defined(THOTH_ARCH_i686)
-						thoth_vga_set_color(char_to_hex(str[i + 2]), thoth_vga_terminal_color >> 4);
+						Thoth::Kernel::Driver::VGA::SetColour((Thoth::Kernel::Driver::VGA::Colour)char_to_hex(str[i + 2]), (Thoth::Kernel::Driver::VGA::Colour)(Thoth::Kernel::Driver::VGA::cursor_colour >> 4));
 					#else
 						// Do nothing
 					#endif
@@ -174,7 +176,7 @@ static int putsn(const char* str, size_t len)
 					escaped = 1;
 
 					#if defined(THOTH_ARCH_x86_64) || defined(THOTH_ARCH_i686)
-						thoth_vga_set_color(thoth_vga_terminal_color & 0xF, char_to_hex(str[i + 2]));
+						Thoth::Kernel::Driver::VGA::SetColour((Thoth::Kernel::Driver::VGA::Colour)(Thoth::Kernel::Driver::VGA::cursor_colour & 0xF), (Thoth::Kernel::Driver::VGA::Colour)char_to_hex(str[i + 2]));
 					#else
 						// Do nothing
 					#endif
@@ -187,7 +189,7 @@ static int putsn(const char* str, size_t len)
 		if (escaped != 1)
 		{
 			#if defined(THOTH_ARCH_x86_64) || defined(THOTH_ARCH_i686)
-				thoth_vga_putc(str[i]);
+				Thoth::Kernel::Driver::VGA::PutChar(str[i]);
 			#else
 				// Do nothing
 			#endif

@@ -1,7 +1,7 @@
 /*
 * 	filename	: str.h
-* 	component	: libc
-* 	description	: String-related function definitions
+* 	component	: thoth
+* 	description	: String conversion function definitions
 *
 * 	This file is part of Thoth.
 *
@@ -20,8 +20,8 @@
 */
 
 // Header Guard
-#ifndef _THOTH_COM_STR_STR_H
-#define _THOTH_COM_STR_STR_H 1
+#ifndef _THOTH_COM_CONV_STR_H
+#define _THOTH_COM_CONV_STR_H 1
 
 /* THOTH */
 
@@ -36,36 +36,32 @@
 extern "C" {
 #endif
 
-// NOTE: most functions in this file require the existence of a dynamic memory pool
+/* String to integer Conversion Functions */
 
-/* String Creation Functions */
+ui8		tc_StrToUint8(str s);
+ui16	tc_StrToUInt16(str s);
+ui32	tc_StrToUInt32(str s);
+ui64	tc_StrToUInt64(str s);
 
-str		tc_Str(const cstr s);
+str		tc_StrToInt8(i8 x);
+str		tc_StrToInt16(i16 x);
+str		tc_StrToInt32(i32 x);
+str		tc_StrToInt64(i64 x);
 
-/* String Attribute Functions */
+str		tc_StrToInt(intg x);
 
-ptr		tc_StrSrc(str s);
-psize	tc_StrLen(str s);
+/* String to floating-point Conversion Functions */
 
-/* String Access Functions */
+f32		tc_StrToFloat32(str s);
+f64		tc_StrToFloat64(str s);
 
-char	tc_StrAt(str s, psize pos);
+/* String to boolean Conversion Functions */
 
-/* String Manipulation Functions */
-
-str		tc_CopyStr(str s);
-str		tc_Concat(str s, ...);
-str		tc_SubStr(str s, psize offset, psize len);
-
-/* String Search Functions */
-
-psize	tc_StrFindFirst(str s, char c);
-psize	tc_StrFindLast(str s, char c);
-psize	tc_StrFindSubStr(str s, str sub);
+bool	tc_StrToBool(str s);
 
 // C++ Compatibility
 #ifdef __cplusplus
 } //extern "C"
 #endif
 
-#endif //#ifndef _THOTH_COM_STR_STR_H
+#endif //#ifndef _THOTH_COM_CONV_STR_H

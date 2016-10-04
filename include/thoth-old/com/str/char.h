@@ -1,6 +1,6 @@
 /*
 * 	filename	: char.h
-* 	component	: libc
+* 	component	: thoth
 * 	description	: Character-related function definitions
 *
 * 	This file is part of Thoth.
