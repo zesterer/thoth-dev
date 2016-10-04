@@ -9,6 +9,7 @@
 
 // New C++ headers
 #include "thoth/kernel/driver/vga/vga.hpp"
+#include "thoth/kernel/driver/serial/serial.hpp"
 #include "thoth/std/io.hpp"
 
 #if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
@@ -20,7 +21,7 @@ extern void* kernel_end asm("_kernel_end");
 extern "C" void kernel_early()
 {
 	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
-		Thoth::Result<char> result = Thoth::Kernel::Driver::VGA::Init();
+		Thoth::Status status = Thoth::Kernel::Driver::VGA::Init();
 	#endif
 
 	thoth_io_check("Entered kernel bootstrap", STATUS_SUCCESS);
@@ -31,7 +32,7 @@ extern "C" void kernel_early()
 	#endif
 
 	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
-		thoth_io_check("Initialized VGA terminal", result.status);
+		thoth_io_check("Initialized VGA terminal", status.getError());
 	#endif
 
 	thoth_io_check("Kernel bootstrap complete", STATUS_INFO);
@@ -60,6 +61,9 @@ extern "C" void kernel_main()
 	// Dynamic Memory Map
 	int dmm_status = thoth_mem_init((void*)0x1000000, 0x100000, 1024); // At 16 MB, 1 MB in size, composed of blocks of 1 KB
 	thoth_io_check("Initiated kernel dynamic memory", !(dmm_status == 0));
+
+	Thoth::Kernel::Driver::Serial::InitPort(Thoth::Kernel::Driver::Serial::Port::COM1, 0, 8, 1, Thoth::Kernel::Driver::Serial::Parity::ODD);
+	Thoth::Kernel::Driver::Serial::WriteStr(Thoth::Kernel::Driver::Serial::Port::COM1, "Hello, World! This is some serial output!\n");
 
 	// Virtual File System
 	int vfs_status = thoth_vfs_init();

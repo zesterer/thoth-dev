@@ -1,5 +1,5 @@
 /*
-* 	filename	: vga.hpp
+* 	filename	: serial.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,11 +19,14 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_DRIVER_VGA_VGA_HPP
-#define _THOTH_KERNEL_DRIVER_VGA_VGA_HPP 1
+#ifndef _THOTH_KERNEL_DRIVER_SERIAL_SERIAL_HPP
+#define _THOTH_KERNEL_DRIVER_SERIAL_SERIAL_HPP 1
 
 // Thoth headers
 #include "thoth/std/util.hpp"
+
+// GCC Headers
+#include "stddef.h"
 
 namespace Thoth
 {
@@ -31,35 +34,36 @@ namespace Thoth
 	{
 		namespace Driver
 		{
-			namespace VGA
+			namespace Serial
 			{
-				enum class Colour
+				enum class Port
 				{
-					BLACK         = 0x0,
-					BLUE          = 0x1,
-					GREEN         = 0x2,
-					CYAN          = 0x3,
-					RED           = 0x4,
-					MAGENTA       = 0x5,
-					BROWN         = 0x6,
-					LIGHT_GREY    = 0x7,
-					DARK_GREY     = 0x8,
-					LIGHT_BLUE    = 0x9,
-					LIGHT_GREEN   = 0xA,
-					LIGHT_CYAN    = 0xB,
-					LIGHT_RED     = 0xC,
-					LIGHT_MAGENTA = 0xD,
-					LIGHT_BROWN   = 0XE,
-					WHITE         = 0xF,
+					COM1 = 0x3F8,
+					COM2 = 0x2F8,
+					COM3 = 0x3E8,
+					COM4 = 0x2E8,
 				};
 
-				extern unsigned char cursor_colour;
+				enum class Parity
+				{
+					NONE =  (0x0 << 3),
+					ODD =   (0x1 << 3),
+					EVEN =  (0x3 << 3),
+					MARK =  (0x5 << 3),
+					SPACE = (0x7 << 3),
+				};
 
 				Status Init();
 
-				void SetColour(Colour front_color, Colour back_color);
-				void PlaceCursor(int row, int column);
-				void PutChar(char c);
+				Status InitPort(Port port, int baudrate, char databits, char stopbits, Parity parity);
+
+				bool DataReceived(Port port);
+				Result<char> ReadData(Port port);
+
+				bool CanWrite(Port port);
+				Status Write(Port port, char c);
+				Status WriteData(Port port, const unsigned char* s, size_t n);
+				Status WriteStr(Port port, const char* s);
 			}
 		}
 	}

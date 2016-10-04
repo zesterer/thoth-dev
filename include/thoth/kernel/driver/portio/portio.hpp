@@ -1,5 +1,5 @@
 /*
-* 	filename	: vga.hpp
+* 	filename	: portio.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,8 +19,8 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_DRIVER_VGA_VGA_HPP
-#define _THOTH_KERNEL_DRIVER_VGA_VGA_HPP 1
+#ifndef _THOTH_KERNEL_DRIVER_PORTIO_PORTIO_HPP
+#define _THOTH_KERNEL_DRIVER_PORTIO_PORTIO_HPP 1
 
 // Thoth headers
 #include "thoth/std/util.hpp"
@@ -31,35 +31,15 @@ namespace Thoth
 	{
 		namespace Driver
 		{
-			namespace VGA
+			namespace PortIO
 			{
-				enum class Colour
-				{
-					BLACK         = 0x0,
-					BLUE          = 0x1,
-					GREEN         = 0x2,
-					CYAN          = 0x3,
-					RED           = 0x4,
-					MAGENTA       = 0x5,
-					BROWN         = 0x6,
-					LIGHT_GREY    = 0x7,
-					DARK_GREY     = 0x8,
-					LIGHT_BLUE    = 0x9,
-					LIGHT_GREEN   = 0xA,
-					LIGHT_CYAN    = 0xB,
-					LIGHT_RED     = 0xC,
-					LIGHT_MAGENTA = 0xD,
-					LIGHT_BROWN   = 0XE,
-					WHITE         = 0xF,
-				};
+				Status Out8(unsigned short port, unsigned char value);
+				Status Out16(unsigned short port, unsigned short value);
+				Status Out32(unsigned short port, unsigned int value);
 
-				extern unsigned char cursor_colour;
-
-				Status Init();
-
-				void SetColour(Colour front_color, Colour back_color);
-				void PlaceCursor(int row, int column);
-				void PutChar(char c);
+				Result<unsigned char> In8(unsigned short port);
+				Result<unsigned short> In16(unsigned short port);
+				Result<unsigned int> In32(unsigned short port);
 			}
 		}
 	}

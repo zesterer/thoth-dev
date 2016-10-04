@@ -26,26 +26,33 @@ namespace Thoth
 {
 	enum { STATUS_SUCCESS = 0, };
 
-	/* Result type */
+	/* Status type */
 
-	template <typename T>
-	struct Result
+	struct Status
 	{
-		T value;
 		int status;
 
-		Result (int status)
+		Status(int status)
 		{
-			this->status = status;
-		}
-
-		Result (T value, int status)
-		{
-			this->value = value;
 			this->status = status;
 		}
 
 		bool getSuccessful() { return this->status == STATUS_SUCCESS; }
+		int getError() { return this->status; }
+	};
+
+	/* Result type */
+
+	template <typename T>
+	struct Result : public Status
+	{
+		T value;
+
+		Result(T value, int status) : Status(status)
+		{
+			this->value = value;
+		}
+
 		T getValue() { return this->value; }
 	};
 }

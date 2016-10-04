@@ -21,8 +21,7 @@
 // Thoth headers
 #include "thoth/kernel/driver/vga/vga.hpp"
 #include "thoth/kernel/driver/vga/screen.hpp"
-
-#include "thoth/port.h"
+#include "thoth/kernel/driver/portio/portio.hpp"
 
 // GCC headers
 #include "stdint.h"
@@ -47,7 +46,7 @@ namespace Thoth
 				uint8_t cursor_colour;
 				uint16_t* screen_buffer;
 
-				Result<char> Init()
+				Status Init()
 				{
 					cursor_row = 0;
 					cursor_column = 0;
@@ -65,7 +64,7 @@ namespace Thoth
 						}
 					}
 
-					return Result<char>(STATUS_SUCCESS);
+					return Status(STATUS_SUCCESS);
 				}
 
 				static uint8_t MakeColour(Colour fg, Colour bg)
@@ -94,11 +93,11 @@ namespace Thoth
 					unsigned short pos = row * SCREEN_WIDTH + column;
 
 				    // cursor LOW port to vga INDEX register
-				    thoth_port_outb(0x3D4, 0x0F);
-				    thoth_port_outb(0x3D5, (uint8_t)(pos & 0xFF));
+				    PortIO::Out8(0x3D4, 0x0F);
+				    PortIO::Out8(0x3D5, (uint8_t)(pos & 0xFF));
 				    // cursor HIGH port to vga INDEX register
-				    thoth_port_outb(0x3D4, 0x0E);
-				    thoth_port_outb(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
+				    PortIO::Out8(0x3D4, 0x0E);
+				    PortIO::Out8(0x3D5, (uint8_t)((pos >> 8) & 0xFF));
 				}
 
 				void PutChar(char c)

@@ -103,7 +103,7 @@ namespace Thoth
 						}
 					}
 
-					return 0;
+					return Result<size_t>(n, STATUS_SUCCESS);
 				}
 
 				Std::Stream::Stream stdout;
