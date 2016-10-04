@@ -10,6 +10,7 @@
 // New C++ headers
 #include "thoth/kernel/driver/vga/vga.hpp"
 #include "thoth/kernel/driver/serial/serial.hpp"
+#include "thoth/kernel/driver/cmos/cmos.hpp"
 #include "thoth/std/io.hpp"
 
 #if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
@@ -32,7 +33,7 @@ extern "C" void kernel_early()
 	#endif
 
 	#if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
-		thoth_io_check("Initialized VGA terminal", status.getError());
+		thoth_io_check("Initiating VGA terminal", status.getError());
 	#endif
 
 	thoth_io_check("Kernel bootstrap complete", STATUS_INFO);
@@ -54,16 +55,28 @@ void kernel_welcome()
 	printf("$FF\n");
 }
 
+static inline uint64_t rdtsc_n()
+{
+    uint64_t ret;
+    asm volatile ( "rdtsc" : "=A"(ret) );
+    return ret;
+}
+
 extern "C" void kernel_main()
 {
 	thoth_io_check("Entered kernel main", STATUS_SUCCESS);
 
 	// Dynamic Memory Map
 	int dmm_status = thoth_mem_init((void*)0x1000000, 0x100000, 1024); // At 16 MB, 1 MB in size, composed of blocks of 1 KB
-	thoth_io_check("Initiated kernel dynamic memory", !(dmm_status == 0));
+	thoth_io_check("Initiating kernel dynamic memory", !(dmm_status == 0));
 
-	Thoth::Kernel::Driver::Serial::InitPort(Thoth::Kernel::Driver::Serial::Port::COM1, 0, 8, 1, Thoth::Kernel::Driver::Serial::Parity::ODD);
+	Thoth::Status status_serial = Thoth::Kernel::Driver::Serial::Init();
+	thoth_io_check("Initiating kernel serial driver", status_serial.getError());
+	Thoth::Kernel::Driver::Serial::InitPort(Thoth::Kernel::Driver::Serial::Port::COM1, 57600, 8, 1, Thoth::Kernel::Driver::Serial::Parity::ODD);
 	Thoth::Kernel::Driver::Serial::WriteStr(Thoth::Kernel::Driver::Serial::Port::COM1, "Hello, World! This is some serial output!\n");
+
+	Thoth::Status status_cmos = Thoth::Kernel::Driver::CMOS::Init();
+	thoth_io_check("Initiating kernel CMOS driver", status_cmos.getError());
 
 	// Virtual File System
 	int vfs_status = thoth_vfs_init();
@@ -73,14 +86,14 @@ extern "C" void kernel_main()
 
 	kernel_welcome();
 
-	Thoth::Std::IO::PrintFormat("Hello, there! Here's the number twelve:%iand four hundred and six as hex:%X\n", 12, 406);
+	/*Thoth::Std::IO::PrintFormat("Hello, there! Here's the number twelve:%iand four hundred and six as hex:%X\n", 12, 406);
 
 	THOTH_VFS_NODE_ID root = thoth_vfs_get_root();
 	THOTH_VFS_NODE_ID testdir = thoth_vfs_create_node("testdir", root, THOTH_VFS_DIRECTORY);
 	THOTH_VFS_NODE_ID file1 = thoth_vfs_create_node("file1", testdir, THOTH_VFS_FILE);
 	THOTH_VFS_NODE_ID file2 = thoth_vfs_create_node("file2", root, THOTH_VFS_FILE);
 	//thoth_vfs_delete_node(testdir);
-	thoth_vfs_display();
+	thoth_vfs_display();*/
 
 	// Dynamic memory test
 	/*{
@@ -110,9 +123,19 @@ extern "C" void kernel_main()
 	}*/
 
 	// CPU cycle clock
-	while (false)
+	while (true)
 	{
-		if (rdtsc() % 10000000 == 0)
+		int i = 0;
+		if (rdtsc_n() % 10000000 == 0)
+		{
 			printf("Tick!\n");
+			i ++;
+			if (i > 4)
+				break;
+		}
 	}
+
+	Thoth::Kernel::Driver::CMOS::Update();
+	for (int i = 0; i < 128; i ++)
+		Thoth::Std::IO::PrintFormat("%X,", Thoth::Kernel::Driver::CMOS::GetRegister(i));
 }

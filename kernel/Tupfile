@@ -4,4 +4,4 @@ INCLUDES= -Iinclude -I../include
 
 : foreach *.c *.cpp	|> !COMPILER_CPP $(CPP_FLAGS)	|>
 
-: *.o $(OBJECTS) libc/*.o thoth/*.o thoth/vfs/*.o lib/thoth/std/*.o lib/thoth/kernel/driver/portio/*.o lib/thoth/kernel/driver/vga/*.o lib/thoth/kernel/driver/serial/*.o | $(KERNEL_LINK_SCRIPT) |> !LINKER_CPP -T $(KERNEL_LINK_SCRIPT) $(CPP_FLAGS) |> thoth.bin
+: *.o $(OBJECTS) libc/*.o thoth/*.o thoth/vfs/*.o lib/thoth/std/*.o lib/thoth/kernel/driver/portio/*.o lib/thoth/kernel/driver/vga/*.o lib/thoth/kernel/driver/serial/*.o lib/thoth/kernel/driver/cmos/*.o | $(KERNEL_LINK_SCRIPT) |> !LINKER_CPP -T $(KERNEL_LINK_SCRIPT) $(CPP_FLAGS) |> thoth.bin

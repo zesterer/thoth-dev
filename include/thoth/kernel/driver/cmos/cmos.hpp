@@ -1,5 +1,5 @@
 /*
-* 	filename	: serial.hpp
+* 	filename	: cmos.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,14 +19,11 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_DRIVER_SERIAL_SERIAL_HPP
-#define _THOTH_KERNEL_DRIVER_SERIAL_SERIAL_HPP 1
+#ifndef _THOTH_KERNEL_DRIVER_CMOS_CMOS_HPP
+#define _THOTH_KERNEL_DRIVER_CMOS_CMOS_HPP 1
 
 // Thoth headers
 #include "thoth/std/util.hpp"
-
-// GCC Headers
-#include "stddef.h"
 
 namespace Thoth
 {
@@ -34,36 +31,11 @@ namespace Thoth
 	{
 		namespace Driver
 		{
-			namespace Serial
+			namespace CMOS
 			{
-				enum class Port
-				{
-					COM1 = 0x3F8,
-					COM2 = 0x2F8,
-					COM3 = 0x3E8,
-					COM4 = 0x2E8,
-				};
-
-				enum class Parity
-				{
-					NONE =  (0x0 << 3),
-					ODD =   (0x1 << 3),
-					EVEN =  (0x3 << 3),
-					MARK =  (0x5 << 3),
-					SPACE = (0x7 << 3),
-				};
-
 				Status Init();
-
-				Status InitPort(Port port, int baudrate, unsigned char databits, unsigned char stopbits, Parity parity);
-
-				bool DataReceived(Port port);
-				Result<char> ReadData(Port port);
-
-				bool CanWrite(Port port);
-				Status Write(Port port, char c);
-				Status WriteData(Port port, const unsigned char* s, size_t n);
-				Status WriteStr(Port port, const char* s);
+				Status Update();
+				Result<unsigned char> GetRegister(int i);
 			}
 		}
 	}

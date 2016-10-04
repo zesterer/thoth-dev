@@ -34,18 +34,62 @@ namespace Thoth
 		{
 			namespace Serial
 			{
+				const int UART_CLOCK_TICK_RATE = 115200;
+
 				Status Init()
 				{
 					return Status(STATUS_SUCCESS);
 				}
 
-				Status InitPort(Port port, int baudrate, char databits, char stopbits, Parity parity)
+				Status InitPort(Port port, int baudrate, unsigned char databits, unsigned char stopbits, Parity parity)
 				{
+					// Calculate a divisor value for the baudrate
+					unsigned short divisor = (unsigned short)(UART_CLOCK_TICK_RATE / baudrate);
+
 					PortIO::Out8((unsigned short)port + 1, 0x00); // Disable all interrupts
 					PortIO::Out8((unsigned short)port + 3, 0x80); // Enable DLAB (set baud rate divisor)
-					PortIO::Out8((unsigned short)port + 0, 0x03); // Set divisor to 3 (lo byte) 38400 baud
-					PortIO::Out8((unsigned short)port + 1, 0x00); // Set divisor to 3 (hi byte) 38500 baud
-					PortIO::Out8((unsigned short)port + 3, 0x03); // 8 bits, no parity, one stop bit
+
+					// Divisor short value
+					PortIO::Out8((unsigned short)port + 0, ((divisor >> 0) & 0xFF)); // Set divisor (lo byte)
+					PortIO::Out8((unsigned short)port + 1, ((divisor >> 8) & 0xFF)); // Set divisor (hi byte)
+
+					/* Serial configuration parameters */
+
+					unsigned char databits_val = 0;
+					unsigned char stopbits_val = 0;
+
+					// Find databits value equivalent
+					switch (databits)
+					{
+						case (5):
+							databits_val = 0x0;
+							break;
+						case (6):
+							databits_val = 0x1;
+							break;
+						case (7):
+							databits_val = 0x2;
+							break;
+						case (8):
+						default:
+							databits_val = 0x3;
+							break;
+					}
+
+					// Find stopbits value equivalent
+					switch (stopbits)
+					{
+						case (1):
+							stopbits_val = 0x4;
+							break;
+						case (2):
+						default:
+							stopbits_val = 0x0;
+							break;
+					}
+
+					unsigned char serial_config = databits_val | stopbits_val | (unsigned char)parity;
+					PortIO::Out8((unsigned short)port + 3, serial_config); // 8 bits, no parity, one stop bit
 					PortIO::Out8((unsigned short)port + 2, 0xC7); // Enable FIFO, clear them, with 14-byte threshold
 					PortIO::Out8((unsigned short)port + 4, 0x0B); // IRQs enabled, RTS/DSR set
 
