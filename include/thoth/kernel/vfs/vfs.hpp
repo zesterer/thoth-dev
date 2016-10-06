@@ -1,5 +1,5 @@
 /*
-* 	filename	: cmos.cpp
+* 	filename	: vfs.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -18,44 +18,27 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+// Header guard
+#ifndef _THOTH_KERNEL_VFS_VFS_HPP
+#define _THOTH_KERNEL_VFS_VFS_HPP 1
+
 // Thoth headers
-#include "thoth/kernel/driver/cmos/cmos.hpp"
-#include "thoth/kernel/driver/portio/portio.hpp"
+#include "thoth/std/util.hpp"
+#include "thoth/kernel/vfs/file.hpp"
 
 namespace Thoth
 {
 	namespace Kernel
 	{
-		namespace Driver
+		namespace VFS
 		{
-			namespace CMOS
+			struct VFS
 			{
-				const unsigned short CMOS_PORT_IN = 0x70;
-				const unsigned short CMOS_PORT_OUT = 0x71;
-
-				unsigned char cmos_data[256];
-
-				Status Init()
-				{
-					return Status(STATUS_SUCCESS);
-				}
-
-				Status Update()
-				{
-					for (int i = 0; i < 256; i ++)
-					{
-						PortIO::Out8(CMOS_PORT_IN, (unsigned char)i);
-						cmos_data[i] = PortIO::In8(CMOS_PORT_OUT).getValue();
-					}
-
-					return Status(STATUS_SUCCESS);
-				}
-
-				Result<unsigned char> GetRegister(int i)
-				{
-					return Result<unsigned char>(cmos_data[i], STATUS_SUCCESS);
-				}
-			}
+				File root_file;
+			};
 		}
 	}
 }
+
+// Header guard
+#endif

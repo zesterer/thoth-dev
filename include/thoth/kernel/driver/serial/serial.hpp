@@ -24,6 +24,7 @@
 
 // Thoth headers
 #include "thoth/std/util.hpp"
+#include "thoth/kernel/driver/driver.hpp"
 
 // GCC Headers
 #include "stddef.h"
@@ -64,6 +65,8 @@ namespace Thoth
 				Status Write(Port port, char c);
 				Status WriteData(Port port, const unsigned char* s, size_t n);
 				Status WriteStr(Port port, const char* s);
+
+				Result<Driver*> GenerateDriver();
 			}
 		}
 	}

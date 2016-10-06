@@ -13,6 +13,8 @@
 #include "thoth/kernel/driver/cmos/cmos.hpp"
 #include "thoth/std/io.hpp"
 
+#include "thoth/kernel/vfs/vfs.hpp"
+
 #if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
 	#include "thoth/vga.h"
 #endif
@@ -72,8 +74,6 @@ extern "C" void kernel_main()
 
 	Thoth::Status status_serial = Thoth::Kernel::Driver::Serial::Init();
 	thoth_io_check("Initiating kernel serial driver", status_serial.getError());
-	Thoth::Kernel::Driver::Serial::InitPort(Thoth::Kernel::Driver::Serial::Port::COM1, 57600, 8, 1, Thoth::Kernel::Driver::Serial::Parity::ODD);
-	Thoth::Kernel::Driver::Serial::WriteStr(Thoth::Kernel::Driver::Serial::Port::COM1, "Hello, World! This is some serial output!\n");
 
 	Thoth::Status status_cmos = Thoth::Kernel::Driver::CMOS::Init();
 	thoth_io_check("Initiating kernel CMOS driver", status_cmos.getError());
@@ -85,6 +85,11 @@ extern "C" void kernel_main()
 	thoth_io_check("Boot sequence complete", STATUS_INFO);
 
 	kernel_welcome();
+
+	Thoth::Std::IO::PrintFormat("Opening '%s' serial port: baud=%i, databits=%i, bufbits=%i, parity=%s...\n", "COM2", 57600, 8, 1, "ODD");
+	Thoth::Kernel::Driver::Serial::InitPort(Thoth::Kernel::Driver::Serial::Port::COM1, 57600, 8, 1, Thoth::Kernel::Driver::Serial::Parity::ODD);
+	Thoth::Std::IO::PrintFormat("Outputting string '%s' to serial...\n", "Hello, World! This is some serial output on the COM2 port at a baud rate of 57600 Hz, 8 databits, 1 buffer bit and odd transmission parity!");
+	Thoth::Kernel::Driver::Serial::WriteStr(Thoth::Kernel::Driver::Serial::Port::COM1, "Hello, World! This is some serial output on the COM2 port at a baud rate of 57600 Hz, 8 databits, 1 buffer bit and odd transmission parity!\n");
 
 	/*Thoth::Std::IO::PrintFormat("Hello, there! Here's the number twelve:%iand four hundred and six as hex:%X\n", 12, 406);
 
@@ -123,19 +128,16 @@ extern "C" void kernel_main()
 	}*/
 
 	// CPU cycle clock
-	while (true)
+	while (false)
 	{
-		int i = 0;
 		if (rdtsc_n() % 10000000 == 0)
 		{
 			printf("Tick!\n");
-			i ++;
-			if (i > 4)
-				break;
+			break;
 		}
 	}
 
 	Thoth::Kernel::Driver::CMOS::Update();
-	for (int i = 0; i < 128; i ++)
-		Thoth::Std::IO::PrintFormat("%X,", Thoth::Kernel::Driver::CMOS::GetRegister(i));
+	//for (int i = 0; i < 256; i ++)
+	//	Thoth::Std::IO::PrintFormat("%i,", Thoth::Kernel::Driver::CMOS::GetRegister(i));
 }

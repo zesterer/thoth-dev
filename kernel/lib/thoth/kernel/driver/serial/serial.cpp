@@ -41,6 +41,11 @@ namespace Thoth
 					return Status(STATUS_SUCCESS);
 				}
 
+				Status Update()
+				{
+					return Status(STATUS_SUCCESS);
+				}
+
 				Status InitPort(Port port, int baudrate, unsigned char databits, unsigned char stopbits, Parity parity)
 				{
 					// Calculate a divisor value for the baudrate
@@ -136,6 +141,13 @@ namespace Thoth
 						Write(port, s[i]);
 
 					return Status(STATUS_SUCCESS);
+				}
+
+				Result<Driver*> GenerateDriver()
+				{
+					Driver* serial_driver = new Driver(&Init, &Update);
+
+					return Result<Driver*>(serial_driver, STATUS_SUCCESS);
 				}
 			}
 		}

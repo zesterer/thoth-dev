@@ -1,7 +1,6 @@
 /*
 * 	filename	: vnode.hpp
 * 	component	: thoth
-* 	description	: Virtual Network Node definitions
 *
 * 	This file is part of Thoth.
 *
@@ -30,14 +29,41 @@ namespace Thoth
 		{
 			struct VNode
 			{
-				char name[256];
+				char name[MAX_NODE_NAME_SIZE];
 				unsigned long id;
 
 				VNode* parent;
-				VNode* children[64];
+				VNode* children[MAX_CHILD_NODES];
+
+				VNode(const char* name)
+				{
+					for (int i = 0; i < MAX_NODE_NAME_SIZE && name[i] != '\0'; i ++)
+					{
+						this->name[i] = name[i];
+					}
+
+					for (int i = 0; i < MAX_CHILD_NODES; i ++)
+						this->children[i] = nullptr;
+				}
+
+				Result<VNode*> addChild(const char* name)
+				{
+					for (int i = 0; i < MAX_CHILD_NODES; i ++)
+					{
+						if (this->children[i] == nullptr)
+						{
+							VNode* new_node = new VNode(name);
+							new_node.parent = this;
+						}
+					}
+
+					return Result<VNode*>(nullptr, 1);
+				}
+
+
 			}
 		}
 	}
 }
 
-#endif // #ifndef _THOTH_KERNEL_VNET_VNODE_H
+#endif

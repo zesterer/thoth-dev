@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="97">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name=".tup">
+        <df name="mnt">
+        </df>
+        <df name="tmp">
+        </df>
+      </df>
+      <df name="build-default">
+        <df name="config">
+        </df>
+        <df name="grub">
+          <df name="isodir">
+            <df name="boot">
+              <df name="grub">
+              </df>
+            </df>
+          </df>
+        </df>
+        <df name="include">
+          <df name="libc">
+            <df name="fragment">
+            </df>
+          </df>
+          <df name="thoth">
+            <df name="common">
+            </df>
+            <df name="kernel">
+              <df name="driver">
+                <df name="cmos">
+                </df>
+                <df name="portio">
+                </df>
+                <df name="serial">
+                </df>
+                <df name="vga">
+                </df>
+              </df>
+              <df name="vnet">
+              </df>
+            </df>
+            <df name="std">
+              <df name="str">
+              </df>
+              <df name="vnet">
+              </df>
+            </df>
+          </df>
+          <df name="thoth-old">
+            <df name="com">
+              <df name="conv">
+              </df>
+              <df name="mem">
+              </df>
+              <df name="str">
+              </df>
+              <df name="type">
+              </df>
+            </df>
+          </df>
+        </df>
+        <df name="kernel">
+          <df name="arch">
+            <df name="i686">
+              <df name="boot">
+              </df>
+              <df name="thoth">
+              </df>
+            </df>
+            <df name="include">
+              <df name="i686">
+                <df name="boot">
+                </df>
+                <df name="thoth-i686">
+                </df>
+              </df>
+              <df name="x86_64">
+                <df name="boot">
+                </df>
+                <df name="thoth-x86_64">
+                </df>
+              </df>
+            </df>
+            <df name="x86_64">
+              <df name="boot">
+              </df>
+              <df name="thoth">
+              </df>
+            </df>
+          </df>
+          <df name="include">
+            <df name="system">
+              <df name="driver">
+                <df name="net">
+                </df>
+                <df name="ps2">
+                </df>
+                <df name="usb">
+                </df>
+                <df name="vga">
+                </df>
+              </df>
+              <df name="init">
+              </df>
+              <df name="ipc">
+                <df name="socket">
+                </df>
+              </df>
+              <df name="provider">
+                <df name="drisock">
+                </df>
+                <df name="filesystem">
+                </df>
+              </df>
+              <df name="task">
+              </df>
+            </df>
+            <df name="thoth">
+              <df name="process">
+              </df>
+              <df name="semaphore">
+              </df>
+              <df name="task">
+              </df>
+              <df name="vfs">
+              </df>
+            </df>
+          </df>
+          <df name="lib">
+            <df name="thoth">
+              <df name="kernel">
+                <df name="driver">
+                  <df name="cmos">
+                  </df>
+                  <df name="portio">
+                  </df>
+                  <df name="serial">
+                  </df>
+                  <df name="vga">
+                  </df>
+                </df>
+              </df>
+              <df name="std">
+              </df>
+            </df>
+          </df>
+          <df name="libc">
+          </df>
+          <df name="system">
+            <df name="driver">
+              <df name="net">
+              </df>
+              <df name="ps2">
+              </df>
+              <df name="usb">
+              </df>
+              <df name="vga">
+              </df>
+            </df>
+            <df name="init">
+            </df>
+            <df name="ipc">
+              <df name="socket">
+              </df>
+            </df>
+            <df name="provider">
+              <df name="drisock">
+              </df>
+              <df name="filesystem">
+              </df>
+            </df>
+            <df name="task">
+            </df>
+          </df>
+          <df name="thoth">
+            <df name="process">
+            </df>
+            <df name="semaphore">
+            </df>
+            <df name="task">
+            </df>
+            <df name="vfs">
+            </df>
+          </df>
+        </df>
+        <df name="misc">
+        </df>
+        <df name="sysroot">
+          <df name="boot">
+          </df>
+          <df name="dev">
+            <df name="drive">
+            </df>
+            <df name="keyboard">
+            </df>
+            <df name="mouse">
+            </df>
+          </df>
+          <df name="sbin">
+          </df>
+          <df name="usr">
+            <df name="exec">
+            </df>
+            <df name="include">
+            </df>
+            <df name="lib">
+              <df name="shared">
+              </df>
+              <df name="static">
+              </df>
+            </df>
+            <df name="prog">
+              <df name="cstd">
+                <df name="include">
+                  <df name="cstd">
+                  </df>
+                </df>
+                <df name="lib">
+                  <df name="shared">
+                  </df>
+                  <df name="static">
+                  </df>
+                </df>
+                <df name="src">
+                </df>
+              </df>
+              <df name="hello-world">
+                <df name="bin">
+                </df>
+                <df name="data">
+                </df>
+                <df name="include">
+                </df>
+                <df name="src">
+                </df>
+              </df>
+            </df>
+            <df name="src">
+            </df>
+          </df>
+        </df>
+        <df name="tests">
+          <df name="local">
+            <df name="gcc">
+            </df>
+          </df>
+          <df name="tup">
+            <df name="hello">
+              <df name="include">
+                <df name="hello">
+                </df>
+              </df>
+              <df name="square">
+                <df name="include">
+                  <df name="square">
+                  </df>
+                </df>
+                <df name="src">
+                </df>
+              </df>
+              <df name="src">
+              </df>
+            </df>
+          </df>
+        </df>
+        <df name="tools">
+        </df>
+      </df>
+      <df name="config">
+      </df>
+      <df name="grub">
+        <df name="isodir">
+          <df name="boot">
+            <df name="grub">
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="include">
+        <df name="libc">
+          <df name="fragment">
+            <in>_file_type.h</in>
+            <in>_null_value.h</in>
+          </df>
+          <in>ctype.h</in>
+          <in>stdio.h</in>
+          <in>stdlib.h</in>
+          <in>string.h</in>
+        </df>
+        <df name="thoth">
+          <df name="common">
+            <in>vns.hpp</in>
+          </df>
+          <df name="kernel">
+            <df name="driver">
+              <df name="cmos">
+                <in>cmos.hpp</in>
+              </df>
+              <df name="portio">
+                <in>portio.hpp</in>
+              </df>
+              <df name="serial">
+                <in>serial.hpp</in>
+              </df>
+              <df name="vga">
+                <in>screen.hpp</in>
+                <in>vga.hpp</in>
+              </df>
+              <in>driver.hpp</in>
+            </df>
+            <df name="vnet">
+              <in>vnet.hpp</in>
+              <in>vnode.hpp</in>
+            </df>
+          </df>
+          <df name="std">
+            <df name="str">
+              <in>str.hpp</in>
+            </df>
+            <df name="vnet">
+              <in>msg.hpp</in>
+              <in>vnet.hpp</in>
+            </df>
+            <in>char.hpp</in>
+            <in>int.hpp</in>
+            <in>io.hpp</in>
+            <in>stream.hpp</in>
+            <in>util.hpp</in>
+          </df>
+        </df>
+        <df name="thoth-old">
+          <df name="com">
+            <df name="conv">
+              <in>bool.h</in>
+              <in>float.h</in>
+              <in>int.h</in>
+              <in>str.h</in>
+            </df>
+            <df name="mem">
+              <in>mem.h</in>
+            </df>
+            <df name="str">
+              <in>char.h</in>
+              <in>str.h</in>
+            </df>
+            <df name="type">
+              <in>all.h</in>
+              <in>bool.h</in>
+              <in>data.h</in>
+              <in>float.h</in>
+              <in>int.h</in>
+              <in>str.h</in>
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="kernel">
+        <df name="arch">
+          <df name="i686">
+            <df name="boot">
+              <in>boot.s</in>
+              <in>crti.s</in>
+              <in>crtn.s</in>
+            </df>
+            <df name="thoth">
+              <in>port.c</in>
+              <in>time.c</in>
+            </df>
+          </df>
+          <df name="include">
+            <df name="i686">
+              <df name="boot">
+              </df>
+              <df name="thoth-i686">
+              </df>
+            </df>
+            <df name="x86_64">
+              <df name="boot">
+              </df>
+              <df name="thoth-x86_64">
+              </df>
+            </df>
+          </df>
+          <df name="x86_64">
+            <df name="boot">
+              <in>boot.s</in>
+              <in>bootstrap.s</in>
+              <in>crti.s</in>
+              <in>crtn.s</in>
+              <in>multiboot.s</in>
+            </df>
+            <df name="thoth">
+              <in>port.c</in>
+              <in>time.c</in>
+            </df>
+          </df>
+        </df>
+        <df name="include">
+          <df name="system">
+            <df name="driver">
+              <df name="net">
+              </df>
+              <df name="ps2">
+              </df>
+              <df name="usb">
+              </df>
+              <df name="vga">
+              </df>
+            </df>
+            <df name="init">
+            </df>
+            <df name="ipc">
+              <df name="socket">
+              </df>
+            </df>
+            <df name="provider">
+              <df name="drisock">
+              </df>
+              <df name="filesystem">
+              </df>
+            </df>
+            <df name="task">
+            </df>
+          </df>
+          <df name="thoth">
+            <df name="process">
+            </df>
+            <df name="semaphore">
+            </df>
+            <df name="task">
+            </df>
+            <df name="vfs">
+              <in>vfs.h</in>
+            </df>
+            <in>io.h</in>
+            <in>mem.h</in>
+            <in>port.h</in>
+            <in>time.h</in>
+            <in>vga.h</in>
+          </df>
+        </df>
+        <df name="lib">
+          <df name="thoth">
+            <df name="kernel">
+              <df name="driver">
+                <df name="cmos">
+                  <in>cmos.cpp</in>
+                </df>
+                <df name="portio">
+                  <in>portio.cpp</in>
+                </df>
+                <df name="serial">
+                  <in>serial.cpp</in>
+                </df>
+                <df name="vga">
+                  <in>screen.cpp</in>
+                  <in>vga.cpp</in>
+                </df>
+              </df>
+            </df>
+            <df name="std">
+              <in>char.cpp</in>
+              <in>cpp.cpp</in>
+              <in>int.cpp</in>
+              <in>io.cpp</in>
+            </df>
+          </df>
+        </df>
+        <df name="libc">
+          <in>ctype.c</in>
+          <in>stdio.c</in>
+          <in>stdlib.c</in>
+          <in>string.c</in>
+        </df>
+        <df name="system">
+          <df name="driver">
+            <df name="net">
+            </df>
+            <df name="ps2">
+            </df>
+            <df name="usb">
+            </df>
+            <df name="vga">
+            </df>
+          </df>
+          <df name="init">
+          </df>
+          <df name="ipc">
+            <df name="socket">
+            </df>
+          </df>
+          <df name="provider">
+            <df name="drisock">
+            </df>
+            <df name="filesystem">
+            </df>
+          </df>
+          <df name="task">
+          </df>
+        </df>
+        <df name="thoth">
+          <df name="process">
+          </df>
+          <df name="semaphore">
+          </df>
+          <df name="task">
+          </df>
+          <df name="vfs">
+            <in>vfs.c</in>
+          </df>
+          <in>io.c</in>
+          <in>mem.c</in>
+          <in>port.c</in>
+          <in>vga.c</in>
+        </df>
+        <in>kernel.cpp</in>
+      </df>
+      <df name="misc">
+      </df>
+      <df name="sysroot">
+        <df name="boot">
+        </df>
+        <df name="dev">
+          <df name="drive">
+          </df>
+          <df name="keyboard">
+          </df>
+          <df name="mouse">
+          </df>
+        </df>
+        <df name="sbin">
+        </df>
+        <df name="usr">
+          <df name="exec">
+          </df>
+          <df name="include">
+          </df>
+          <df name="lib">
+            <df name="shared">
+            </df>
+            <df name="static">
+            </df>
+          </df>
+          <df name="prog">
+            <df name="cstd">
+              <df name="include">
+                <df name="cstd">
+                </df>
+              </df>
+              <df name="lib">
+                <df name="shared">
+                </df>
+                <df name="static">
+                </df>
+              </df>
+              <df name="src">
+              </df>
+            </df>
+            <df name="hello-world">
+              <df name="bin">
+              </df>
+              <df name="data">
+              </df>
+              <df name="include">
+              </df>
+              <df name="src">
+                <in>main.c</in>
+              </df>
+            </df>
+          </df>
+          <df name="src">
+          </df>
+        </df>
+      </df>
+      <df name="tests">
+        <df name="local">
+          <df name="gcc">
+            <in>main.c</in>
+          </df>
+        </df>
+        <df name="tup">
+          <df name="hello">
+            <df name="include">
+              <df name="hello">
+                <in>output.h</in>
+              </df>
+            </df>
+            <df name="square">
+              <df name="include">
+                <df name="square">
+                  <in>square.h</in>
+                </df>
+              </df>
+              <df name="src">
+                <in>square.c</in>
+              </df>
+            </df>
+            <df name="src">
+              <in>main.c</in>
+              <in>output.c</in>
+            </df>
+          </df>
+        </df>
+      </df>
+      <df name="tools">
+      </df>
+    </df>
+  </logicalFolder>
+  <projectmakefile>makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>"${OUTPUT_PATH}"</runcommand>
+        <rundir>.</rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+    <conf name="Thoth" type="0">
+      <toolsSet>
+        <developmentServer>localhost</developmentServer>
+        <platform>2</platform>
+      </toolsSet>
+      <compile>
+        <compiledirpicklist>
+          <compiledirpicklistitem>${AUTO_FOLDER}</compiledirpicklistitem>
+          <compiledirpicklistitem>.</compiledirpicklistitem>
+        </compiledirpicklist>
+        <compiledir>${AUTO_FOLDER}</compiledir>
+        <compilecommandpicklist>
+          <compilecommandpicklistitem>${AUTO_COMPILE}</compilecommandpicklistitem>
+          <compilecommandpicklistitem>${MAKE} ${ITEM_NAME}.o</compilecommandpicklistitem>
+        </compilecommandpicklist>
+        <compilecommand>${AUTO_COMPILE}</compilecommand>
+      </compile>
+      <dbx_gdbdebugger version="1">
+        <gdb_pathmaps>
+        </gdb_pathmaps>
+        <gdb_interceptlist>
+          <gdbinterceptoptions gdb_all="false" gdb_unhandled="true" gdb_unexpected="true"/>
+        </gdb_interceptlist>
+        <gdb_options>
+          <DebugOptions>
+          </DebugOptions>
+        </gdb_options>
+        <gdb_buildfirst gdb_buildfirst_overriden="false" gdb_buildfirst_old="false"/>
+      </dbx_gdbdebugger>
+      <nativedebugger version="1">
+        <engine>gdb</engine>
+      </nativedebugger>
+      <runprofile version="9">
+        <runcommandpicklist>
+          <runcommandpicklistitem>"${OUTPUT_PATH}"</runcommandpicklistitem>
+          <runcommandpicklistitem>sh qemu64.sh</runcommandpicklistitem>
+        </runcommandpicklist>
+        <runcommand>sh qemu64.sh</runcommand>
+        <rundir></rundir>
+        <buildfirst>false</buildfirst>
+        <terminal-type>0</terminal-type>
+        <remove-instrumentation>0</remove-instrumentation>
+        <environment>
+        </environment>
+      </runprofile>
+    </conf>
+  </confs>
+</configurationDescriptor>

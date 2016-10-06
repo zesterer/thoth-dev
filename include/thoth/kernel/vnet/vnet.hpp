@@ -28,6 +28,9 @@ namespace Thoth
 	{
 		namespace VNet
 		{
+			const int MAX_CHILD_NODES = 64;
+			const int MAX_NODE_NAME_SIZE = 256;
+
 			struct VNet
 			{
 				VNode* root;
