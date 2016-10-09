@@ -1,5 +1,5 @@
 /*
-* 	filename	: vfs.hpp
+* 	filename	: glob.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,31 +19,31 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_VFS_VFS_HPP
-#define _THOTH_KERNEL_VFS_VFS_HPP 1
+#ifndef _THOTH_KERNEL_VNS_GLOB_HPP
+#define _THOTH_KERNEL_VNS_GLOB_HPP 1
 
 // Thoth headers
-#include "thoth/kernel/vfs/file.hpp"
+#include "thoth/std/util.hpp"
 
 namespace Thoth
 {
 	namespace Kernel
 	{
-		namespace VFS
+		namespace VNS
 		{
-			struct VFS
+			enum class NodeAttribute
 			{
-				bool initiated;
-				File root;
+				PARENT       = (1 << 0),
+				READABLE     = (1 << 1),
+				WRITEABLE    = (1 << 2),
 
-				Status init();
-				bool isInitiated() { return this->initiated; }
+				DEFAULT_FILE = READABLE | WRITEABLE,
+				DEFAULT_DIR  = PARENT,
 			};
 
-			Status Init();
-			Status Update();
+			const char NODENAME_DELIMITER = '/';
 
-			Result<File*> GetRoot();
+			const size_t NODE_MAX_CHILDREN = 32;
 		}
 	}
 }

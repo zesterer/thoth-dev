@@ -13,7 +13,7 @@
 #include "thoth/kernel/driver/cmos/cmos.hpp"
 #include "thoth/std/io.hpp"
 
-#include "thoth/kernel/vfs/vfs.hpp"
+#include "thoth/kernel/vns/vns.hpp"
 
 #if defined(THOTH_ARCH_i686) || defined(THOTH_ARCH_x86_64)
 	#include "thoth/vga.h"
@@ -69,7 +69,7 @@ extern "C" void kernel_main()
 	thoth_io_check("Entered kernel main", STATUS_SUCCESS);
 
 	// Dynamic Memory Map
-	int dmm_status = thoth_mem_init((void*)0x1000000, 0x100000, 1024); // At 16 MB, 1 MB in size, composed of blocks of 1 KB
+	int dmm_status = thoth_mem_init((void*)0x1000000, 0x100000, 256); // At 16 MB, 1 MB in size, composed of blocks of 256 B
 	thoth_io_check("Initiating kernel dynamic memory", !(dmm_status == 0));
 
 	Thoth::Status status_serial = Thoth::Kernel::Driver::Serial::Init();
@@ -79,8 +79,22 @@ extern "C" void kernel_main()
 	thoth_io_check("Initiating kernel CMOS driver", status_cmos.getError());
 
 	// Virtual File System
-	int vfs_status = thoth_vfs_init();
-	thoth_io_check("Initiated kernel virtual filesystem", !(vfs_status == 0));
+	//int vfs_status = thoth_vfs_init();
+	Thoth::Status status_vfs = Thoth::Kernel::VNS::Init();
+	thoth_io_check("Initiated kernel VFS", status_vfs.getError());
+	unsigned long dir = (unsigned long)Thoth::Kernel::VNS::NodeAttribute::DEFAULT_DIR;
+	Thoth::Kernel::VNS::Node* r0 = Thoth::Kernel::VNS::GetVNS().getValue()->getRoot().getValue();
+	Thoth::Kernel::VNS::Node* n1 = r0->addChild("bin", dir).getValue();
+	Thoth::Kernel::VNS::Node* n2 = n1->addChild("hello-world").getValue();
+	Thoth::Kernel::VNS::Node* n3 = r0->addChild("dev", dir).getValue();
+	Thoth::Kernel::VNS::Node* n4 = n3->addChild("serial", dir).getValue();
+	Thoth::Kernel::VNS::Node* n5 = n3->addChild("COM1").getValue();
+	Thoth::Kernel::VNS::Node* n6 = n3->addChild("COM2").getValue();
+	Thoth::Kernel::VNS::Node* n7 = n1->addChild("extra", dir).getValue();
+	Thoth::Kernel::VNS::Node* n8 = n7->addChild("test-exec").getValue();
+	Thoth::Kernel::VNS::Node* n9 = n7->addChild("examples", dir).getValue();
+	r0->getNode("/bin/extra/examples").getValue()->addChild("example0");
+	Thoth::Kernel::VNS::DisplayMap();
 
 	thoth_io_check("Boot sequence complete", STATUS_INFO);
 

@@ -1,5 +1,5 @@
 /*
-* 	filename	: vfs.hpp
+* 	filename	: vfs.cpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -18,12 +18,8 @@
 * 	along with Thoth.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-// Header guard
-#ifndef _THOTH_KERNEL_VFS_VFS_HPP
-#define _THOTH_KERNEL_VFS_VFS_HPP 1
-
 // Thoth headers
-#include "thoth/kernel/vfs/file.hpp"
+#include "thoth/kernel/vfs/vfs.hpp"
 
 namespace Thoth
 {
@@ -31,22 +27,30 @@ namespace Thoth
 	{
 		namespace VFS
 		{
-			struct VFS
+			VFS global_vfs;
+
+			Status VFS::init()
 			{
-				bool initiated;
-				File root;
+				Status status = this->root.dir_file.init();
 
-				Status init();
-				bool isInitiated() { return this->initiated; }
-			};
+				if (status.getSuccessful())
+					this->initiated = true;
 
-			Status Init();
-			Status Update();
+				return status;
+			}
 
-			Result<File*> GetRoot();
+			Status Init()
+			{
+				return global_vfs.init();
+			}
+
+			Result<File*> GetRoot()
+			{
+				if (global_vfs.isInitiated())
+					return Result<File*>(&global_vfs.root, STATUS_SUCCESS);
+				else
+					return Result<File*>(nullptr, 1);
+			}
 		}
 	}
 }
-
-// Header guard
-#endif

@@ -1,5 +1,5 @@
 /*
-* 	filename	: vfs.hpp
+* 	filename	: blockfile.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,11 +19,11 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_VFS_VFS_HPP
-#define _THOTH_KERNEL_VFS_VFS_HPP 1
+#ifndef _THOTH_KERNEL_VFS_FILETYPE_DATAFILE_HPP
+#define _THOTH_KERNEL_VFS_FILETYPE_DATAFILE_HPP 1
 
 // Thoth headers
-#include "thoth/kernel/vfs/file.hpp"
+#include "thoth/kernel/vfs/filetype/basefile.hpp"
 
 namespace Thoth
 {
@@ -31,19 +31,22 @@ namespace Thoth
 	{
 		namespace VFS
 		{
-			struct VFS
+			namespace FileType
 			{
-				bool initiated;
-				File root;
+				struct DataFile : BaseFile
+				{
+					size_t data_ref;
 
-				Status init();
-				bool isInitiated() { return this->initiated; }
-			};
+					Status init()
+					{
+						this->type = FileType::DATA;
 
-			Status Init();
-			Status Update();
+						this->data_ref = 0;
 
-			Result<File*> GetRoot();
+						return STATUS_SUCCESS;
+					}
+				};
+			}
 		}
 	}
 }

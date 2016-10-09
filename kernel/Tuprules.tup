@@ -1,6 +1,6 @@
 VERSION_FLAGS=-DTHOTH_ARCH_@(TARGET) -DTHOTH_ARCH=\"@(TARGET)\" -DTHOTH_VERSION=\"$(PROJECT_VERSION)\" -DTHOTH_VERSION_MAJOR=\"$(PROJECT_VERSION_MAJOR)\" -DTHOTH_VERSION_MINOR=\"$(PROJECT_VERSION_MINOR)\" -DTHOTH_VERSION_RELEASE=\"$(PROJECT_VERSION_RELEASE)\"
 
-COMMON_FLAGS=-std=gnu++11 -fno-rtti -ffreestanding -O2 -Wall -Wextra -nostdlib -fpic -lgcc
+COMMON_FLAGS=-std=gnu++11 -fno-rtti -ffreestanding -O2 -Wall -Wextra -nostdlib -fpic -lgcc -fno-exceptions -fno-rtti
 
 ifeq (@(TARGET),i686)
 	OBJECTS=arch/i686/boot/*.o arch/i686/thoth/*.o

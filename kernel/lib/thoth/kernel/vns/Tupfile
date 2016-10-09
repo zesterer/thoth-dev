@@ -1,0 +1,5 @@
+include_rules
+
+INCLUDES= -I../../../../include -I../../../../../include
+
+: foreach *.c *.cpp |> !COMPILER_CPP $(CPP_FLAGS) |>

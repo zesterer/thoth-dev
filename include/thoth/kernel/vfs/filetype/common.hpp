@@ -1,5 +1,5 @@
 /*
-* 	filename	: vfs.hpp
+* 	filename	: common.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,11 +19,8 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_VFS_VFS_HPP
-#define _THOTH_KERNEL_VFS_VFS_HPP 1
-
-// Thoth headers
-#include "thoth/kernel/vfs/file.hpp"
+#ifndef _THOTH_KERNEL_VFS_FILETYPE_COMMON_HPP
+#define _THOTH_KERNEL_VFS_FILETYPE_COMMON_HPP 1
 
 namespace Thoth
 {
@@ -31,19 +28,16 @@ namespace Thoth
 	{
 		namespace VFS
 		{
-			struct VFS
+			namespace FileType
 			{
-				bool initiated;
-				File root;
-
-				Status init();
-				bool isInitiated() { return this->initiated; }
-			};
-
-			Status Init();
-			Status Update();
-
-			Result<File*> GetRoot();
+				enum class FileType
+				{
+					DATA = 0x1,
+					DIR  = 0x2,
+					SOCK = 0x3,
+					LINK = 0x4,
+				};
+			}
 		}
 	}
 }

@@ -1,5 +1,5 @@
 /*
-* 	filename	: vfs.hpp
+* 	filename	: vns.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,31 +19,29 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_VFS_VFS_HPP
-#define _THOTH_KERNEL_VFS_VFS_HPP 1
+#ifndef _THOTH_KERNEL_VNS_VNS_HPP
+#define _THOTH_KERNEL_VNS_VNS_HPP 1
 
 // Thoth headers
-#include "thoth/kernel/vfs/file.hpp"
+#include "thoth/kernel/vns/node.hpp"
 
 namespace Thoth
 {
 	namespace Kernel
 	{
-		namespace VFS
+		namespace VNS
 		{
-			struct VFS
+			struct VNS
 			{
-				bool initiated;
-				File root;
+				Node* root = nullptr;
 
-				Status init();
-				bool isInitiated() { return this->initiated; }
+				VNS();
+				Result<Node*> getRoot();
 			};
 
 			Status Init();
-			Status Update();
-
-			Result<File*> GetRoot();
+			Result<VNS*> GetVNS();
+			Status DisplayMap();
 		}
 	}
 }

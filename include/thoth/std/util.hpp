@@ -22,9 +22,12 @@
 #ifndef _THOTH_STD_UTIL_HPP
 #define _THOTH_STD_UTIL_HPP 1
 
+// GCC Headers
+#include "stddef.h"
+
 namespace Thoth
 {
-	enum { STATUS_SUCCESS = 0, };
+	enum { STATUS_SUCCESS = 0, STATUS_FAILURE = 1, };
 
 	/* Status type */
 

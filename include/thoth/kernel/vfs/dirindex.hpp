@@ -1,5 +1,5 @@
 /*
-* 	filename	: vfs.hpp
+* 	filename	: directoryindex.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,11 +19,11 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_VFS_VFS_HPP
-#define _THOTH_KERNEL_VFS_VFS_HPP 1
+#ifndef _THOTH_KERNEL_VFS_DIRECTORYINDEX_HPP
+#define _THOTH_KERNEL_VFS_DIRECTORYINDEX_HPP 1
 
 // Thoth headers
-#include "thoth/kernel/vfs/file.hpp"
+#include "thoth/kernel/vfs/common.hpp"
 
 namespace Thoth
 {
@@ -31,19 +31,18 @@ namespace Thoth
 	{
 		namespace VFS
 		{
-			struct VFS
+			const int MAX_DIRINDEX_CHILDREN = 256;
+
+			struct DirIndex
 			{
-				bool initiated;
-				File root;
+				File* children[MAX_DIRINDEX_CHILDREN];
 
-				Status init();
-				bool isInitiated() { return this->initiated; }
+				DirIndex()
+				{
+					for (int i = 0; i < MAX_DIRINDEX_CHILDREN; i ++)
+						this->children[i] = nullptr;
+				}
 			};
-
-			Status Init();
-			Status Update();
-
-			Result<File*> GetRoot();
 		}
 	}
 }
