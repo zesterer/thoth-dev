@@ -108,7 +108,7 @@ void free(void* ptr)
 
 void* realloc(void* ptr, size_t size)
 {
-	return NULL;
+	return thoth_mem_reallocate(ptr, size);
 }
 
 /* Integer arithmetics */

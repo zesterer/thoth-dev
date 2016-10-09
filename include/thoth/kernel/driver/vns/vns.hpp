@@ -1,5 +1,5 @@
 /*
-* 	filename	: node.hpp
+* 	filename	: vns.hpp
 * 	component	: thoth
 *
 * 	This file is part of Thoth.
@@ -19,34 +19,23 @@
 */
 
 // Header guard
-#ifndef _THOTH_KERNEL_VNS_NODE_HPP
-#define _THOTH_KERNEL_VNS_NODE_HPP 1
+#ifndef _THOTH_KERNEL_DRIVER_VNS_VNS_HPP
+#define _THOTH_KERNEL_DRIVER_VNS_VNS_HPP 1
 
 // Thoth headers
-#include "thoth/kernel/vns/glob.hpp"
+#include "thoth/std/util.hpp"
+#include "thoth/kernel/driver/driver.hpp"
 
 namespace Thoth
 {
 	namespace Kernel
 	{
-		namespace VNS
+		namespace Driver
 		{
-			struct Node
+			namespace VNS
 			{
-				unsigned long flags = (unsigned long)NodeAttribute::DEFAULT_FILE;
-
-				const char* name = nullptr;
-				Node* parent = nullptr;
-
-				Node* children[32];
-
-				Node(const char* name, unsigned long flags = (unsigned long)NodeAttribute::DEFAULT_FILE);
-				Result<Node*> addChild(const char* name, unsigned long flags = (unsigned long)NodeAttribute::DEFAULT_FILE);
-				Result<Node*> getParent();
-				Result<Node*> getRoot();
-				Result<Node*> getChild(const char* name);
-				Result<Node*> getNode(const char* nodename);
-			};
+				Result<Driver> GenDriver();
+			}
 		}
 	}
 }

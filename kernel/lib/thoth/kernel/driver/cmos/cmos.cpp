@@ -30,17 +30,37 @@ namespace Thoth
 		{
 			namespace CMOS
 			{
+				/* Driver hook method definitions */
+
+				Status Init();
+				Status Tick();
+
+				/* Driver generation method */
+
+				Result<Driver> GenDriver()
+				{
+					return Result<Driver>(Driver("cmos", SoftwareVersion(0, 1, 0), Init, Tick), STATUS_SUCCESS);
+				}
+
+				/* Driver code */
+
+				/* Definitions */
+
 				const unsigned short CMOS_PORT_IN = 0x70;
 				const unsigned short CMOS_PORT_OUT = 0x71;
 
+				Result<unsigned char> GetRegister(int i);
+
 				unsigned char cmos_data[256];
+
+				/* Code */
 
 				Status Init()
 				{
 					return Status(STATUS_SUCCESS);
 				}
 
-				Status Update()
+				Status Tick()
 				{
 					for (int i = 0; i < 256; i ++)
 					{

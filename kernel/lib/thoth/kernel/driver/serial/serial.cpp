@@ -22,6 +22,7 @@
 #include "thoth/std/util.hpp"
 #include "thoth/kernel/driver/serial/serial.hpp"
 #include "thoth/kernel/driver/portio/portio.hpp"
+#include "thoth/std/io.hpp"
 
 // GCC headers
 #include "stdint.h"
@@ -34,14 +35,59 @@ namespace Thoth
 		{
 			namespace Serial
 			{
+				/* Driver hook method definitions */
+
+				Status Init();
+				Status Tick();
+
+				/* Driver generation method */
+
+				Result<Driver> GenDriver()
+				{
+					return Result<Driver>(Driver("serial", SoftwareVersion(0, 1, 0), Init, Tick), STATUS_SUCCESS);
+				}
+
+				/* Driver code */
+
+				/* Definitions */
+
 				const int UART_CLOCK_TICK_RATE = 115200;
+
+				enum class Port
+				{
+					COM1 = 0x3F8,
+					COM2 = 0x2F8,
+					COM3 = 0x3E8,
+					COM4 = 0x2E8,
+				};
+
+				enum class Parity
+				{
+					NONE =  (0x0 << 3),
+					ODD =   (0x1 << 3),
+					EVEN =  (0x3 << 3),
+					MARK =  (0x5 << 3),
+					SPACE = (0x7 << 3),
+				};
+
+				Status InitPort(Port port, int baudrate, unsigned char databits, unsigned char stopbits, Parity parity);
+
+				bool DataReceived(Port port);
+				Result<char> ReadData(Port port);
+
+				bool CanWrite(Port port);
+				Status Write(Port port, char c);
+				Status WriteData(Port port, const unsigned char* s, size_t n);
+				Status WriteStr(Port port, const char* s);
+
+				/* Code */
 
 				Status Init()
 				{
 					return Status(STATUS_SUCCESS);
 				}
 
-				Status Update()
+				Status Tick()
 				{
 					return Status(STATUS_SUCCESS);
 				}
@@ -141,13 +187,6 @@ namespace Thoth
 						Write(port, s[i]);
 
 					return Status(STATUS_SUCCESS);
-				}
-
-				Result<Driver*> GenerateDriver()
-				{
-					Driver* serial_driver = new Driver(&Init, &Update);
-
-					return Result<Driver*>(serial_driver, STATUS_SUCCESS);
 				}
 			}
 		}

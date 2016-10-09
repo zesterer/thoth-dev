@@ -37,36 +37,7 @@ namespace Thoth
 		{
 			namespace Serial
 			{
-				enum class Port
-				{
-					COM1 = 0x3F8,
-					COM2 = 0x2F8,
-					COM3 = 0x3E8,
-					COM4 = 0x2E8,
-				};
-
-				enum class Parity
-				{
-					NONE =  (0x0 << 3),
-					ODD =   (0x1 << 3),
-					EVEN =  (0x3 << 3),
-					MARK =  (0x5 << 3),
-					SPACE = (0x7 << 3),
-				};
-
-				Status Init();
-
-				Status InitPort(Port port, int baudrate, unsigned char databits, unsigned char stopbits, Parity parity);
-
-				bool DataReceived(Port port);
-				Result<char> ReadData(Port port);
-
-				bool CanWrite(Port port);
-				Status Write(Port port, char c);
-				Status WriteData(Port port, const unsigned char* s, size_t n);
-				Status WriteStr(Port port, const char* s);
-
-				Result<Driver*> GenerateDriver();
+				Result<Driver> GenDriver();
 			}
 		}
 	}

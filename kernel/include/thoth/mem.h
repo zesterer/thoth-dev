@@ -30,6 +30,7 @@ void	thoth_mem_display(size_t n);
 
 void*	thoth_mem_copy(const char* src, char* dest, size_t n);
 void*	thoth_mem_allocate(size_t n);
+void*	thoth_mem_reallocate(void* mem, size_t n);
 int		thoth_mem_free(const void* mem);
 
 #endif

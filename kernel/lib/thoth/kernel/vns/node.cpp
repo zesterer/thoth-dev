@@ -29,13 +29,13 @@ namespace Thoth
 	{
 		namespace VNS
 		{
-			Node::Node(char* name, unsigned long flags)
+			Node::Node(const char* name, unsigned long flags)
 			{
 				this->name = name;
 				this->flags = flags;
 			}
 
-			Result<Node*> Node::addChild(char* name, unsigned long flags)
+			Result<Node*> Node::addChild(const char* name, unsigned long flags)
 			{
 				if ((this->flags & (unsigned long)NodeAttribute::DIRECTORY) == 0)
 					return Result<Node*>(nullptr, STATUS_FAILURE);
@@ -105,7 +105,16 @@ namespace Thoth
 				size_t i = 0;
 				size_t name_start = 0;
 
-				for (; nodename[i] == '/'; i ++) {}
+				if (nodename[i] == NODENAME_DELIMITER)
+				{
+					if (this->flags & (unsigned long)NodeAttribute::ROOT)
+						i ++;
+					else
+					{
+						Node* root = this->getRoot().getValue();
+						return root->getNode(nodename);
+					}
+				}
 
 				name_start = i;
 

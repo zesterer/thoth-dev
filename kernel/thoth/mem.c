@@ -117,6 +117,46 @@ void* thoth_mem_allocate(size_t n)
 	return (void*)((size_t)thoth_ddump_start + free_index * thoth_dblock_size);
 }
 
+void* thoth_mem_reallocate(void* mem, size_t n)
+{
+	if (!thoth_dmem_enabled)
+	{
+		puts("$F4Error [Allocate]$FF : Thoth dynamic memory is not enabled\n");
+		return NULL;
+	}
+
+	void* newloc = thoth_mem_allocate(n);
+
+	size_t index = ((size_t)mem - (size_t)thoth_ddump_start);
+	size_t len = thoth_dblock_size;
+
+	if (index % thoth_dblock_size != 0)
+		return NULL;
+
+	index /= thoth_dblock_size;
+
+	((uint8_t*)thoth_dmap_start)[index] = (!USED) | (!HEAD);
+	for (size_t i = index + 1; i < thoth_dblock_count; i ++)
+	{
+		if (((uint8_t*)thoth_dmap_start)[i] & USED)
+		{
+			if (((uint8_t*)thoth_dmap_start)[i] & HEAD)
+				break;
+			else
+				len += thoth_dblock_size;
+		}
+		else
+			break;
+	}
+
+	for (size_t i = 0; i < n && i < len; i ++)
+		((uint8_t*)newloc)[i] = ((uint8_t*)mem)[i];
+
+	thoth_mem_free(mem);
+
+	return newloc;
+}
+
 int thoth_mem_free(const void* mem)
 {
 	if (!thoth_dmem_enabled)

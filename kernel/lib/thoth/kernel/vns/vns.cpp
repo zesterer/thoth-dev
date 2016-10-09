@@ -47,6 +47,11 @@ namespace Thoth
 				return Status(STATUS_SUCCESS);
 			}
 
+			Status Tick()
+			{
+				return Status(STATUS_SUCCESS);
+			}
+
 			Result<VNS*> GetVNS()
 			{
 				if (glob_vns == nullptr)
@@ -58,9 +63,9 @@ namespace Thoth
 			static void DisplayNode(Node* node, int depth)
 			{
 				for (int i = 0; i < depth - 1; i ++)
-					Std::IO::Print("$F8|$FF   ");
+					Std::IO::Print("$F8|$FF  ");
 				if (depth > 0)
-					Std::IO::Print("|-> ");
+					Std::IO::Print("|- ");
 
 				if (depth > 8)
 				{

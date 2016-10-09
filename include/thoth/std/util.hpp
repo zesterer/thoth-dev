@@ -58,6 +58,20 @@ namespace Thoth
 
 		T getValue() { return this->value; }
 	};
+
+	/* Version type */
+
+	struct SoftwareVersion
+	{
+		int major, minor, build;
+
+		SoftwareVersion(int major, int minor, int build)
+		{
+			this->major = major;
+			this->minor = minor;
+			this->build = build;
+		}
+	};
 }
 
 // Header guard

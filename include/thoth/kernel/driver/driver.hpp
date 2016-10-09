@@ -33,13 +33,23 @@ namespace Thoth
 		{
 			struct Driver
 			{
-				Status (*init_driver)();
-				Status (*tick_driver)();
+				const char* name = nullptr;
+				SoftwareVersion version = {0, 0, 0};
+				Status (*init_func)();
+				Status (*tick_func)();
 
-				Driver(Status (*init_driver)(), Status (*tick_driver)())
+				Driver()
 				{
-					this->init_driver = init_driver;
-					this->tick_driver = tick_driver;
+					this->init_func = nullptr;
+					this->tick_func = nullptr;
+				}
+
+				Driver(const char* name, SoftwareVersion version, Status (*init_func)(), Status (*tick_func)())
+				{
+					this->name = name;
+					this->version = version;
+					this->init_func = init_func;
+					this->tick_func = tick_func;
 				}
 			};
 		}

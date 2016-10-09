@@ -24,6 +24,7 @@
 
 // Thoth headers
 #include "thoth/std/util.hpp"
+#include "thoth/kernel/driver/driver.hpp"
 
 namespace Thoth
 {
@@ -33,9 +34,7 @@ namespace Thoth
 		{
 			namespace CMOS
 			{
-				Status Init();
-				Status Update();
-				Result<unsigned char> GetRegister(int i);
+				Result<Driver> GenDriver();
 			}
 		}
 	}
