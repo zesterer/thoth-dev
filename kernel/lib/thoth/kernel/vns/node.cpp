@@ -21,6 +21,8 @@
 // Thoth headers
 #include "thoth/kernel/vns/node.hpp"
 
+#include "thoth/std/io.hpp"
+
 namespace Thoth
 {
 	namespace Kernel
@@ -35,7 +37,7 @@ namespace Thoth
 
 			Result<Node*> Node::addChild(char* name, unsigned long flags)
 			{
-				if ((this->flags & (unsigned long)NodeAttribute::PARENT) == 0)
+				if ((this->flags & (unsigned long)NodeAttribute::DIRECTORY) == 0)
 					return Result<Node*>(nullptr, STATUS_FAILURE);
 
 				for (size_t i = 0; i < NODE_MAX_CHILDREN; i ++)
@@ -82,6 +84,22 @@ namespace Thoth
 				return Result<Node*>(nullptr, STATUS_FAILURE);
 			}
 
+			Result<Node*> Node::getParent()
+			{
+				if (this->parent == nullptr)
+					return Result<Node*>(nullptr, STATUS_FAILURE);
+				else
+					return Result<Node*>(this->parent, STATUS_SUCCESS);
+			}
+
+			Result<Node*> Node::getRoot()
+			{
+				if (this->flags & (unsigned long)NodeAttribute::ROOT)
+					return Result<Node*>(this, STATUS_SUCCESS);
+				else
+					return Result<Node*>(this->getParent().getValue()->getRoot().getValue(), STATUS_SUCCESS);
+			}
+
 			Result<Node*> Node::getNode(const char* nodename)
 			{
 				size_t i = 0;
@@ -95,7 +113,20 @@ namespace Thoth
 				{
 					if (nodename[i] == NODENAME_DELIMITER || nodename[i] == '\0')
 					{
-						Node* child = this->getChild(nodename + name_start).getValue();
+						Node* child = nullptr;
+
+						if (i - name_start == 2)
+						{
+							if ((nodename + name_start)[0] == '.' && (nodename + name_start)[1] == '.')
+								child = this->getParent().getValue();
+						}
+						else if (i - name_start == 1)
+						{
+							if ((nodename + name_start)[0] == '.')
+								child = this;
+						}
+						else
+							child = this->getChild(nodename + name_start).getValue();
 
 						if (child == nullptr)
 							return Result<Node*>(nullptr, STATUS_FAILURE);

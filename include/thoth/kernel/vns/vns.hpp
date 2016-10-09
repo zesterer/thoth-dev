@@ -41,7 +41,7 @@ namespace Thoth
 
 			Status Init();
 			Result<VNS*> GetVNS();
-			Status DisplayMap();
+			Status DisplayTree(Node* node = nullptr);
 		}
 	}
 }

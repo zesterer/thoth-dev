@@ -32,7 +32,7 @@ namespace Thoth
 
 			VNS::VNS()
 			{
-				this->root = new Node((char*)"root", (unsigned long)NodeAttribute::DEFAULT_DIR);
+				this->root = new Node((char*)"root", (unsigned long)NodeAttribute::DEFAULT_ROOT);
 			}
 
 			Result<Node*> VNS::getRoot()
@@ -57,8 +57,10 @@ namespace Thoth
 
 			static void DisplayNode(Node* node, int depth)
 			{
-				for (int i = 0; i < depth; i ++)
-					Std::IO::Print("|  ");
+				for (int i = 0; i < depth - 1; i ++)
+					Std::IO::Print("$F8|$FF   ");
+				if (depth > 0)
+					Std::IO::Print("|-> ");
 
 				if (depth > 8)
 				{
@@ -66,17 +68,20 @@ namespace Thoth
 					return;
 				}
 
-				if ((node->flags & (unsigned long)NodeAttribute::PARENT) == 0)
+				if ((node->flags & (unsigned long)NodeAttribute::DIRECTORY) == 0)
 				{
-					Std::IO::Print("$F2FILE$FF ");
+					Std::IO::Print("$F2");
 					Std::IO::Print(node->name);
-					Std::IO::Print("\n");
+					Std::IO::Print("$FF\n");
 				}
-				else if (node->flags & (unsigned long)NodeAttribute::PARENT)
+				else if (node->flags & (unsigned long)NodeAttribute::DIRECTORY)
 				{
-					Std::IO::Print("$F3DIR$FF ");
-					Std::IO::Print(node->name);
-					Std::IO::Print("\n");
+					Std::IO::Print("$F3");
+
+					if ((node->flags & (unsigned long)NodeAttribute::ROOT) == 0)
+						Std::IO::Print(node->name);
+
+					Std::IO::Print("/$FF\n");
 
 					for (size_t i = 0; i < NODE_MAX_CHILDREN; i ++)
 					{
@@ -86,10 +91,10 @@ namespace Thoth
 				}
 			}
 
-			Status DisplayMap()
+			Status DisplayTree(Node* node)
 			{
-				Std::IO::PrintLine("Displaying Virtual Node System...");
-				DisplayNode(GetVNS().getValue()->root, 0);
+				Std::IO::PrintLine("-- $F4FILESYSTEM TREE$FF --");
+				DisplayNode(node == nullptr ? GetVNS().getValue()->getRoot().getValue() : node, 1);
 
 				return Status(STATUS_SUCCESS);
 			}

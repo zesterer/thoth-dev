@@ -42,7 +42,7 @@ namespace Thoth
 			Result<const char*> PrintLine(const char* s)
 			{
 				Kernel::Driver::VGA::stdout.push((unsigned char*)s, strlen(s));
-				Kernel::Driver::VGA::stdout.push((unsigned char*)"\n", 2);
+				Kernel::Driver::VGA::stdout.push((unsigned char*)"\n", 1);
 
 				return Result<const char*>(s, STATUS_SUCCESS);
 			}

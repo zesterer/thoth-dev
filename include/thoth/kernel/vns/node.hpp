@@ -43,6 +43,7 @@ namespace Thoth
 				Node(char* name, unsigned long flags = (unsigned long)NodeAttribute::DEFAULT_FILE);
 				Result<Node*> addChild(char* name, unsigned long flags = (unsigned long)NodeAttribute::DEFAULT_FILE);
 				Result<Node*> getParent();
+				Result<Node*> getRoot();
 				Result<Node*> getChild(const char* name);
 				Result<Node*> getNode(const char* nodename);
 			};

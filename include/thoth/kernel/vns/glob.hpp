@@ -33,12 +33,15 @@ namespace Thoth
 		{
 			enum class NodeAttribute
 			{
-				PARENT       = (1 << 0),
-				READABLE     = (1 << 1),
-				WRITEABLE    = (1 << 2),
+				DIRECTORY    = (1 << 0),
+				ROOT         = (1 << 1),
+
+				READABLE     = (1 << 2),
+				WRITEABLE    = (1 << 3),
 
 				DEFAULT_FILE = READABLE | WRITEABLE,
-				DEFAULT_DIR  = PARENT,
+				DEFAULT_DIR  = DIRECTORY,
+				DEFAULT_ROOT = DIRECTORY | ROOT,
 			};
 
 			const char NODENAME_DELIMITER = '/';

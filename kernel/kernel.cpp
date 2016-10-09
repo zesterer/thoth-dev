@@ -88,13 +88,14 @@ extern "C" void kernel_main()
 	Thoth::Kernel::VNS::Node* n2 = n1->addChild("hello-world").getValue();
 	Thoth::Kernel::VNS::Node* n3 = r0->addChild("dev", dir).getValue();
 	Thoth::Kernel::VNS::Node* n4 = n3->addChild("serial", dir).getValue();
-	Thoth::Kernel::VNS::Node* n5 = n3->addChild("COM1").getValue();
-	Thoth::Kernel::VNS::Node* n6 = n3->addChild("COM2").getValue();
+	Thoth::Kernel::VNS::Node* n5 = n4->addChild("COM1").getValue();
+	Thoth::Kernel::VNS::Node* n6 = n4->addChild("COM2").getValue();
 	Thoth::Kernel::VNS::Node* n7 = n1->addChild("extra", dir).getValue();
 	Thoth::Kernel::VNS::Node* n8 = n7->addChild("test-exec").getValue();
 	Thoth::Kernel::VNS::Node* n9 = n7->addChild("examples", dir).getValue();
-	r0->getNode("/bin/extra/examples").getValue()->addChild("example0");
-	Thoth::Kernel::VNS::DisplayMap();
+	r0->getNode("/bin/extra/./../extra/examples").getValue()->addChild("example0");
+	r0->getNode("/bin/extra/./../extra/..").getValue()->addChild("testfile");
+	Thoth::Kernel::VNS::DisplayTree();
 
 	thoth_io_check("Boot sequence complete", STATUS_INFO);
 
